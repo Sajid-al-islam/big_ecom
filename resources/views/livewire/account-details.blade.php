@@ -45,16 +45,14 @@
                                         <div class="single-input-item">
                                             <div class="row">
                                                 <div class="col-md-6">
+                                                    <label for="email" class="required">Email Addres</label>
+                                                    <input type="email" wire:model="email" id="email" />
+                                                    @error('email') <span class="text-danger error">{{ $message }}</span>@enderror 
+                                                </div>
+                                                <div class="col-md-6">
                                                     <label for="phone" class="required">Mobile Number</label>
                                                     <input wire:model="phone" type="text" id="phone" />
                                                     @error('phone') <span class="text-danger error">{{ $message }}</span>@enderror
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="single-input-item">
-                                                        <label for="email" class="required">Email Addres</label>
-                                                        <input type="email" wire:model="email" id="email" />
-                                                        @error('email') <span class="text-danger error">{{ $message }}</span>@enderror 
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

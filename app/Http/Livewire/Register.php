@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class Register extends Component
 {
-    public $first_name, $last_name, $email, $phone, $password;
+    public $first_name, $last_name, $email, $phone, $password, $password_confirmation;
 
     public function mount()
     {
@@ -36,7 +36,7 @@ class Register extends Component
             'last_name' => 'string',
             'email' => 'required|email',
             'phone' => 'required',
-            'password' => 'required',
+            'password' => 'required|confirmed',
         ]);
 
 

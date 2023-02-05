@@ -46,6 +46,11 @@
                                 <input type="password" name="password" id="password" wire:model="password" placeholder="*****" />
                                 @error('password') <span class="text-danger error">{{ $message }}</span>@enderror
                             </div>
+                            <div class="login-register-input">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                <input type="password" name="password_confirmation" id="password" wire:model="password_confirmation" placeholder="*****" />
+                                @error('password') <span class="text-danger error">{{ $message }}</span>@enderror
+                            </div>
                             <div class="login-register-paragraph">
                                 <p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="#">privacy policy.</a></p>
                             </div>

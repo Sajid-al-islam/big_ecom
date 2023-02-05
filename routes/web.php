@@ -38,6 +38,7 @@ Route::group(['prefix' => '', 'namespace' => "Livewire"], function () {
         Route::get('/review', "Review")->name('frontend.reviews');
         Route::get('/address', "Address")->name('frontend.address');
         Route::get('/account-details', "AccountDetails")->name('frontend.account_details');
+        Route::get('/reset-password', "ResetPassword")->name('frontend.reset_password');
     });
     Route::get('/order-complete', "OrderComplete");
     Route::get('/product/{id}/{product_name}', ProductDetails::class)->name('product_details');
