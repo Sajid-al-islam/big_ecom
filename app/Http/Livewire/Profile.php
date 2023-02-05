@@ -23,8 +23,8 @@ class Profile extends Component
     {
         $this->user = Auth::user();
         if($this->user) {
-            $this->orders = Order::where('user_id', $this->user->id)->paginate(20);
-            $this->reviews = ProductReview::where('user_id', $this->user->id)->paginate(20);
+            $this->orders = Order::where('user_id', $this->user->id)->paginate(5);
+            $this->reviews = ProductReview::where('user_id', $this->user->id)->paginate(5);
         }
 
         

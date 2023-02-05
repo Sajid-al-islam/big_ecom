@@ -24,6 +24,7 @@
                     <td><a href="#" class="check-btn sqr-btn">View</a></td>
                 </tr>
             @endforeach
+                {{ $reviews->links() }}
             @else
                 <b>No Review found!</b>
             @endif
