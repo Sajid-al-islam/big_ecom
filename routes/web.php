@@ -29,7 +29,9 @@ Route::group(['prefix' => '', 'namespace' => "Livewire"], function () {
     Route::get('/contact', "Contact");
     Route::get('/cart', "Cart");
     Route::get('/checkout', "Checkout");
-    Route::get('/profile', "Profile");
+    Route::get('/login', "Login");
+    Route::get('/register', "Register")->name('website_register');
+    Route::get('/profile', "Profile")->name('frontend.profile');
     Route::get('/order-complete', "OrderComplete");
     Route::get('/product/{id}/{product_name}', ProductDetails::class)->name('product_details');
     Route::get('/category/{id}/{category_name}', CategoryProduct::class)->name('category_product');
@@ -57,13 +59,13 @@ Route::prefix('')->namespace('Controllers')->group(function () {
     Route::post('/checkout', 'FrontendController@confirm_order');
     Route::post('/review_submit', 'FrontendController@reviewSubmit');
 
-    Route::get('/login', 'FrontendController@login')->name('login');
-    Route::post('/login', 'FrontendController@loginSubmit')->name('login');
-    Route::get('/logout', 'FrontendController@logout')->name('logout');
+    // Route::get('/login', 'FrontendController@login')->name('login');
+    // Route::post('/login', 'FrontendController@loginSubmit')->name('login');
+    Route::post('/logout', 'FrontendController@logout')->name('logout');
 
     // Auth::routes();
-    Route::post('/website_login', 'FrontendController@website_login')->name('website_login');
-    Route::post('/website_register', 'FrontendController@website_register')->name('website_register');
+    // Route::post('/website_login', 'FrontendController@website_login')->name('website_login');
+    // Route::post('/website_register', 'FrontendController@website_register')->name('website_register');
 
     Route::get('/get-auth-info',function(){
         return Auth::user();

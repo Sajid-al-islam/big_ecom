@@ -20,7 +20,7 @@
                     
                     <a href="{{ route('offer_products') }}" class="header-action-account">Offers</a>
                     @if (Auth::check())
-                        <a href="/profile" class="header-action-account single-nav">Dashboard</a>
+                        <a href="/profile" class="header-action-account single-nav"><i class="fa fa-user fa-2" aria-hidden="true"></i>  Profile</a>
                     @else
                         <a href="/login" class="header-action-account single-nav">Login / SignUp</a>
                     @endif
