@@ -31,11 +31,14 @@ Route::group(['prefix' => '', 'namespace' => "Livewire"], function () {
     Route::get('/checkout', "Checkout");
     Route::get('/login', "Login")->name('website_login');
     Route::get('/register', "Register")->name('website_register');
-    Route::get('/profile', "Profile")->name('frontend.profile');
-    Route::get('/orders', "Orders")->name('frontend.orders');
-    Route::get('/review', "Review")->name('frontend.reviews');
-    Route::get('/address', "Address")->name('frontend.address');
-    Route::get('/account-details', "AccountDetails")->name('frontend.account_details');
+
+    Route::group(['middleware' => ['frontend_auth_check']], function () {
+        Route::get('/profile', "Profile")->name('frontend.profile');
+        Route::get('/orders', "Orders")->name('frontend.orders');
+        Route::get('/review', "Review")->name('frontend.reviews');
+        Route::get('/address', "Address")->name('frontend.address');
+        Route::get('/account-details', "AccountDetails")->name('frontend.account_details');
+    });
     Route::get('/order-complete', "OrderComplete");
     Route::get('/product/{id}/{product_name}', ProductDetails::class)->name('product_details');
     Route::get('/category/{id}/{category_name}', CategoryProduct::class)->name('category_product');

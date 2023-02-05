@@ -3,7 +3,7 @@
     <div class="product-review-item">
         <div class="product-review-top">
             <div class="product-review-thumb">
-                @if ($item->user->photo)
+                @if (isset($item->user) && $item->user->photo)
                     <img src="/{{ $item->user->photo }}" width="64" alt="Images">
                 @else
                     <img src="{{ asset('/avatar.png') }}" width="64" alt="Images">

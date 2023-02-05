@@ -25,7 +25,12 @@ class AccountDetails extends Component
     public function render()
     {
         
-        return view('livewire.account-details');
+        return view('livewire.account-details')
+        ->extends('frontend.layout', [
+            'meta' => [
+                "title" => "Profile page" . " - " . $_SERVER['SERVER_NAME'],
+            ],
+        ]);
     }
 
     public function updateUser()
@@ -34,8 +39,7 @@ class AccountDetails extends Component
             'first_name' => 'required|string',
             'last_name' => 'string',
             'email' => 'required|email',
-            'phone' => 'required',
-            'username' => 'unique:users',
+            'phone' => 'required'
         ]);
 
         $userUpdate = User::find(Auth::user()->id);

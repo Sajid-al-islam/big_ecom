@@ -214,7 +214,11 @@ class FrontendController extends Controller
     }
 
     public function login() {
-        return view('auth.login');
+        return view('livewire.login')->extends('frontend.layout', [
+            'meta' => [
+                "title" => "Profile page" . " - " . $_SERVER['SERVER_NAME'],
+            ],
+        ]);
     }
 
     public function logout()
