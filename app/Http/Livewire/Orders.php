@@ -14,7 +14,7 @@ class Orders extends Component
     {
         $this->user = Auth::user();
         if($this->user) {
-            $this->orders = Order::where('user_id', $this->user->id)->paginate(5);
+            $this->orders = Order::where('user_id', $this->user->id)->paginate(20);
         }
         return view('livewire.orders', [
             'orders' => $this->orders
@@ -22,6 +22,6 @@ class Orders extends Component
             'meta' => [
                 "title" => "Profile page" . " - " . $_SERVER['SERVER_NAME'],
             ],
-        ]);;
+        ]);
     }
 }
