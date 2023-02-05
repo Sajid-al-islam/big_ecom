@@ -31,9 +31,9 @@
                             </div>
 
                             <div class="login-register-input">
-                                <label for="mobile_number" class="col-md-4 col-form-label text-md-right">{{ __('Mobile number') }}</label>
-                                <input type="number" name="mobile_number" wire:model="mobile_number" placeholder="+88017****" />
-                                @error('mobile_number') <span class="text-danger error">{{ $message }}</span>@enderror
+                                <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Mobile number') }}</label>
+                                <input type="number" name="phone" wire:model="phone" placeholder="+88017****" />
+                                @error('phone') <span class="text-danger error">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="login-register-input">

@@ -18,9 +18,9 @@
                         </button>
                     </form>
                     
-                    <a href="{{ route('offer_products') }}" class="header-action-account">Offers</a>
+                    <a href="{{ route('offer_products') }}" class="header-action-account"><i class="icon icon-percent"></i> Offers</a>
                     @if (Auth::check())
-                        <a href="/profile" class="header-action-account single-nav"><i class="fa fa-user fa-2" aria-hidden="true"></i>  Profile</a>
+                        <a href="/profile" class="header-action-account single-nav"><i class="icon icon-user"></i>  Profile</a>
                     @else
                         <a href="/login" class="header-action-account single-nav">Login / SignUp</a>
                     @endif

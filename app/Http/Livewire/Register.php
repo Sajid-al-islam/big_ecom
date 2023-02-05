@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class Register extends Component
 {
-    public $first_name, $last_name, $email, $mobile_number, $password;
+    public $first_name, $last_name, $email, $phone, $password;
 
     public function mount()
     {
@@ -35,7 +35,7 @@ class Register extends Component
             'first_name' => 'required|string',
             'last_name' => 'string',
             'email' => 'required|email',
-            'mobile_number' => 'required',
+            'phone' => 'required',
             'password' => 'required',
         ]);
 
@@ -46,7 +46,7 @@ class Register extends Component
         $user = User::create([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
-            'mobile_number' => $this->mobile_number,
+            'phone' => $this->phone,
             'email' => $this->email,
             'password' => $this->password]);
         

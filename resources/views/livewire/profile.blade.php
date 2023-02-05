@@ -31,7 +31,7 @@
                                             <p>Hello, <strong>{{ $user->first_name }} {{ $user->last_name }}</strong> (If Not <strong>{{ $user->first_name }} {{ $user->last_name }}</strong>
                                                 <a href="javascript:void(0)" onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
-                                   {{ __('Logout') }}</a>)
+                                                {{ __('Logout') }}</a>)
                                             </p>
                                         </div>
                                         <p class="mb-0">From your account dashboard. you can easily check &amp; view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
@@ -39,64 +39,16 @@
                                 </div>
                                 <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                                     <div class="myaccount-content">
-                                        <h3>Orders</h3>
-                                        <table class="myaccount-table table-responsive text-center table table-bordered">
-                                            
-                                            <thead class="thead-light">
-                                            @if (count($orders) > 0)
-                                                <tr>
-                                                    <th>Order</th>
-                                                    <th>Date</th>
-                                                    <th>Status</th>
-                                                    <th>Total</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($orders as $item)    
-                                                    <tr>
-                                                        <td>{{ $item->id }}</td>
-                                                        <td>{{ $item->created_at }}</td>
-                                                        <td>{{ $item->order_status }}</td>
-                                                        <td>{{ $item->total_price }}</td>
-                                                        <td><a href="shop-cart.html" class="check-btn sqr-btn">View</a></td>
-                                                    </tr>
-                                                @endforeach
-                                                @else
-                                                    <b>No order found!</b>
-                                                @endif
-                                            </tbody>
-                                        </table>
+                                        @include('livewire.orders',  [
+                                            'orders' => $orders
+                                        ])
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="download" role="tabpanel" aria-labelledby="download-tab">
                                     <div class="myaccount-content">
-                                        <h3>Reviews</h3>
-                                        <table class="myaccount-table table-responsive text-center table table-bordered">
-                                            
-                                            <thead class="thead-light">
-                                            @if (count($orders) > 0)
-                                                <tr>
-                                                    <th>Product</th>
-                                                    <th>Star</th>
-                                                    <th>Date</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($orders as $item)    
-                                                    <tr>
-                                                        <td>{{ $item->id }}</td>
-                                                        <td>{{ $item->created_at }}</td>
-                                                        <td>{{ $item->order_status }}</td>
-                                                        <td><a href="shop-cart.html" class="check-btn sqr-btn">View</a></td>
-                                                    </tr>
-                                                @endforeach
-                                                @else
-                                                    <b>No Review found!</b>
-                                                @endif
-                                            </tbody>
-                                        </table>
+                                        @include('livewire.review',  [
+                                            'reviews' => $reviews
+                                        ])
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="payment-method" role="tabpanel" aria-labelledby="payment-method-tab">
@@ -121,55 +73,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="account-info" role="tabpanel" aria-labelledby="account-info-tab">
                                     <div class="myaccount-content">
-                                        <h3>Account Details</h3>
-                                        <form class="account-details-form mt-4" action="#">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="single-input-item">
-                                                        <label for="first-name" class="required">First Name</label>
-                                                        <input value="{{ $user->first_name }}" type="text" id="first-name" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="single-input-item">
-                                                        <label for="last-name" class="required">Last Name</label>
-                                                        <input value="{{ $user->last_name }}" type="text" id="last-name" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="single-input-item">
-                                                <label for="display-name" class="required">Display Name</label>
-                                                <input type="text" value="{{ $user->username }}" id="display-name" />
-                                            </div>
-                                            <div class="single-input-item">
-                                                <label for="email" class="required">Email Addres</label>
-                                                <input type="email" value="{{ $user->email }}" id="email" />
-                                            </div>
-                                            <fieldset>
-                                                <legend>Password change</legend>
-                                                <div class="single-input-item">
-                                                    <label for="current-pwd" class="required">Current Password</label>
-                                                    <input type="password" id="current-pwd" />
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class="single-input-item">
-                                                            <label for="new-pwd" class="required">New Password</label>
-                                                            <input type="password" id="new-pwd" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="single-input-item">
-                                                            <label for="confirm-pwd" class="required">Confirm Password</label>
-                                                            <input type="password" id="confirm-pwd" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                            <div class="single-input-item">
-                                                <button class="check-btn sqr-btn">Save Changes</button>
-                                            </div>
-                                        </form>
+                                        @livewire('account-details')
                                     </div>
                                 </div>
                             </div>
