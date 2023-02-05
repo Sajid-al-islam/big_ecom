@@ -2,12 +2,26 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Orders extends Component
 {
+    public $user; 
+    protected $orders=[];
     public function render()
     {
-        return view('livewire.orders');
+        $this->user = Auth::user();
+        if($this->user) {
+            $this->orders = Order::where('user_id', $this->user->id)->paginate(5);
+        }
+        return view('livewire.orders', [
+            'orders' => $this->orders
+        ])->extends('frontend.layout', [
+            'meta' => [
+                "title" => "Profile page" . " - " . $_SERVER['SERVER_NAME'],
+            ],
+        ]);;
     }
 }
