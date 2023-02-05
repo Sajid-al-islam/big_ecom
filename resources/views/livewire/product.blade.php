@@ -1,4 +1,4 @@
-<div class="{{ isset($class)? $class : "col-md-3" }} mb-4">
+<div class="{{ isset($class)? $class : "col-md-3" }} mb-4" :wire:key="{{ $product->id }}">
     @if (isset($product))    
     @php
         $data = [

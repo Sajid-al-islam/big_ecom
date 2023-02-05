@@ -1,5 +1,4 @@
-<div class="category_product_wrapper">
-    
+<div>
     <div class="product-area section-space">
         <div class="container">
             <div class="child_list">
