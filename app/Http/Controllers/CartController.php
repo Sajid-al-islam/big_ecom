@@ -97,6 +97,7 @@ class CartController extends Controller
                 $value['qty']+= 1;
             }
         }
+        $this->cart_save();
         return $this->cart;
     }
     public function qty_decrease($id) {
@@ -108,6 +109,7 @@ class CartController extends Controller
                 }
             }
         }
+        $this->cart_save();
         return $this->cart;
     }
     public function remove($id) {
@@ -115,7 +117,7 @@ class CartController extends Controller
             if($value['product']->id == $id)
             {
                 array_splice($this->cart, $key, 1);
-                Session::put('carts', $this->cart);
+                $this->cart_save();
             }
         }
         
@@ -137,6 +139,7 @@ class CartController extends Controller
                 }
             }
         }
+        $this->cart_save();
         return $this->cart;
     }
 
