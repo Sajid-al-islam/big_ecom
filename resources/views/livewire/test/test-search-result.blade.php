@@ -9,7 +9,8 @@
             <tr>
                 <td>
                     <a href="{{ route('show',$item->id) }}">
-                        {{$item->id}}-{{$item->product_name}}
+                        {{$item->id}} -
+                        {!! str_replace('', '', $item->product_name) !!}
                     </a>
                 </td>
                 <td>

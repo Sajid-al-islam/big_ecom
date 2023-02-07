@@ -7,6 +7,15 @@ use Livewire\Component;
 class TestSearch extends Component
 {
     public $search_key = '';
+    public function mount()
+    {
+        if(request()->has('key')){
+            session()->put('key', request()->get('key'));
+            $this->search_key = request()->get('key');
+        }else{
+            $this->search_key = session()->get('key');
+        }
+    }
 
     public function render()
     {

@@ -17,6 +17,7 @@ class TestSearchResult extends Component
             $this->search_key = session()->get('key');
         }
     }
+
     public function render()
     {
         $products = Product::where('product_name','LIKE','%'.$this->search_key.'%')->latest()->take(10)->paginate(10);
