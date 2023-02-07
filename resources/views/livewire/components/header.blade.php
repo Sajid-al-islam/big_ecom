@@ -1,4 +1,5 @@
 <div>
+    {{-- Do your work, then step back. --}}
     <header class="header-wrapper">
         <div class="header-middle d-none d-xl-block">
             <div class="container custom-container">
@@ -13,22 +14,23 @@
                     <div class="col-auto d-flex justify-content-end align-items-center">
     
                         <form class="header-search-box d-none d-md-block" wire:submit.prevent="submitSearchPage">
-                            <input wire:model="searchQuery" wire:keyup="search_product" class="form-control" type="text" id="search" placeholder="Search Products" />
+                            {{-- <input wire:model="searchQuery" wire:keyup="search_product" class="form-control" type="text" id="search" placeholder="Search Products" /> --}}
+                            <input  class="form-control" type="text" id="search" placeholder="Search Products" />
                             <button type="submit" class="btn-src">
                                 <i class="icon-magnifier"></i>
                             </button>
                         </form>
                         
-                        <a href="{{ route('offer_products') }}" class="header-action-account single-nav"><i class="fa fa-gift fa-2x" aria-hidden="true"></i><span class="align-middle">Offers</span></a>
+                        {{-- <a href="{{ route('offer_products') }}" class="header-action-account single-nav"><i class="fa fa-gift fa-2x" aria-hidden="true"></i><span class="align-middle">Offers</span></a> --}}
                         @if (Auth::check())
                             <a href="/profile" class="header-action-account single-nav"><i class="fa fa-user fa-2x" aria-hidden="true"></i> <span class="align-middle pr-2">Profile</span></a>
                         @else
                             <a href="/login" class="header-action-account single-nav">Login / SignUp</a>
                         @endif
                         
-                        @livewire('cart-count')
+                        @livewire('components.cart-count')
                     </div>
-                    @if ($search_products)
+                    {{-- @if ($search_products)
                         <div class="search_result">
                             <div class="list-group list-group-flush">
                                 @foreach ($search_products as $item)
@@ -46,7 +48,7 @@
                                     <a href="{{ route('search_product', $searchQuery) }}" class="my-5 list-group-item list-group-item-action active text-center">View more</a>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
         </div>
@@ -70,7 +72,7 @@
                                 <i class="icon icon-user"></i>
                             </a>
                             
-                            @livewire('cart-count')
+                            {{-- @livewire('components.cart-count') --}}
                             <button class="btn-menu d-xl-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
                                 <i class="fa fa-bars"></i>
                             </button>
@@ -94,10 +96,11 @@
                                             "category_name" => str_replace(' ', '-', strtolower($category->name))
                                         ];
                                     @endphp
-                                    {{-- <a class="main-nav-link" href="javascript:void(0)" wire:click="category_product({{ $data['id'] }}, {{ $data['name'] }})">
+                                    
+                                    {{-- <a class="main-nav-link" href="{{ route('category_product', $data) }}" >
                                         {{ $category->name }}
                                     </a> --}}
-                                    <a class="main-nav-link" href="{{ route('category_product', $data) }}" >
+                                    <a class="main-nav-link" href="#" >
                                         {{ $category->name }}
                                     </a>
                                 </li>
@@ -134,18 +137,14 @@
                                         "category_name" => str_replace(' ', '-', strtolower($category->name))
                                     ];
                                 @endphp
-                                {{-- <a class="main-nav-link" href="javascript:void(0)" wire:click="category_product({{ $data['id'] }}, {{ $data['name'] }})">
+                                {{-- <a class="main-nav-link" href="{{ route('category_product', $data) }}" >
                                     {{ $category->name }}
                                 </a> --}}
-                                <a class="main-nav-link" href="{{ route('category_product', $data) }}" >
+                                <a class="main-nav-link" href="#" >
                                     {{ $category->name }}
                                 </a>
                             </li>
                             @endforeach 
-                            {{-- <li class="main-nav-item"><a class="main-nav-link" href="about-us.html">About</a></li>
-                            <li class="main-nav-item"><a class="main-nav-link" href="about-us.html">About</a></li>
-                            
-                            <li class="main-nav-item"><a class="main-nav-link" href="contact.html">Contact</a></li> --}}
                             <li class="main-nav-item"><a class="main-nav-link" href="/contact">Contact</a></li>
                         </ul>
                     </nav>
@@ -155,4 +154,3 @@
         </aside>
     </header>
 </div>
-

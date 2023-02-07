@@ -1,4 +1,6 @@
+
 <div class="{{ isset($class)? $class : "col-md-3" }} mb-4" :wire:key="{{ $product->id }}">
+    {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
     @if (isset($product))    
     @php
         $data = [
@@ -41,10 +43,12 @@
                         @endif
                     @endif
                 </div>
-                <button type="button" onclick="addToCart({{ $product->id }})" class="info-btn-cart me-4 mb-4"><i class="icon-handbag"></i></button>
+                <button type="button" onclick="Livewire.emitTo('components.cart-count', 'cartAdded', {{$product->id}})" class="info-btn-cart me-4 mb-4"><i class="icon-handbag"></i></button>
             </div>
         </div>
     </div>
     
     @endif
 </div>
+    
+

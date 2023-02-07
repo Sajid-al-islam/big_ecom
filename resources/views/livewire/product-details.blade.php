@@ -1,4 +1,5 @@
 <div>
+    {{-- Stop trying to control. --}}
     <div class="product-detail-area section-space">
         @if (isset($product))
             <div class="container">
@@ -164,7 +165,7 @@
                                     </div>
                                 </div>   
                                 
-                                @livewire('reviews', ['product_id' => $product->id])
+                                {{-- @livewire('reviews', ['product_id' => $product->id]) --}}
     
                                 {{-- <div class="product-review-item">
                                     <div class="product-review-top">
@@ -216,4 +217,3 @@
         
     </div>
 </div>
-

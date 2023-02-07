@@ -1,9 +1,8 @@
-{{-- @section('content')     --}}
-
-
+<div>
+    {{-- Success is as dangerous as failure. --}}
     <main class="main-content">
         <!--== Start Hero Area Wrapper ==-->
-        @include('frontend.include.banner')
+        @livewire('components.banner')
         <!--== End Hero Area Wrapper ==-->
 
         <!--== Start Features Area Wrapper ==-->
@@ -15,9 +14,4 @@
         {{-- @include('frontend.include.hot_product') --}}
 
     </main>
-
-    <!--== Start Footer Area Wrapper ==-->
-    
-    <!--== Start Side Menu -->
-
-{{-- @endsection --}}
+</div>

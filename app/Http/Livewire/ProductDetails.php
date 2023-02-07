@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Controllers\CartController;
 use App\Models\Product;
 use Livewire\Component;
 use Illuminate\Support\Str;
+
 class ProductDetails extends Component
 {
     public $product_id;
@@ -19,7 +19,6 @@ class ProductDetails extends Component
     {
         $this->product = Product::find($id);
     }
-
     public function render()
     {
         if(isset($this->product->description)) { 
@@ -29,7 +28,7 @@ class ProductDetails extends Component
         return view('livewire.product-details', [
             'product' => $this->product,
         ])
-        ->extends('frontend.layout', [
+        ->extends('layouts.app', [
             'meta' => [
                 "title" => isset($this->product->product_name) ? $this->product->product_name . " - " . $_SERVER['SERVER_NAME'] :  "",
                 "image" => isset($this->product->related_images[0]['image']) ? url('') . '/' . $this->product->related_images[0]['image'] : "",
@@ -40,12 +39,5 @@ class ProductDetails extends Component
                 "keywords" => isset($this->product->search_keywords) ? $this->product->search_keywords : ""
             ],
         ]);
-    }
-    
-    public function addToCart($id, $qty=1)
-    {
-        $cart = new CartController();
-        $cart->add_to_cart($id, $qty);
-        $this->emitUp('product_cart_update');
     }
 }

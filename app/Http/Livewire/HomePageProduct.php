@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 
 class HomePageProduct extends Component
-{
+{   
     public $products;
     public $take;
     public $skip;
@@ -21,6 +21,7 @@ class HomePageProduct extends Component
     protected $listeners = [
         'viewProduct' => 'quickView',
         'CloseViewProduct' => 'closeQuickView',
+        "loadMore" => 'nextPage'
     ];
 
     public function mount()
@@ -68,17 +69,11 @@ class HomePageProduct extends Component
 
     public function nextPage()
     {
+        // dd("working");
         if($this->current_page <= $this->total_page) {
             $this->current_page++;
             $this->get_products();
         }
     }
-
-    public function addToCart($id, $qty=1)
-    {
-        $cart = new CartController();
-        $cart->add_to_cart($id, $qty);
-        session()->flash('message', 'Post successfully updated.');
-        $this->emit('cartAdded');
-    }
+    
 }
