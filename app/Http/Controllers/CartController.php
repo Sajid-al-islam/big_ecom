@@ -24,8 +24,8 @@ class CartController extends Controller
     }
 
     public function add_to_cart($id, $qty)
-    {   
-        
+    {
+
         foreach ($this->cart as $key => $value) {
             if($value['product']->id == $id)
             {
@@ -33,7 +33,7 @@ class CartController extends Controller
                 return $this->cart;
             }
         }
-        
+
         $product = Product::where('id', $id)
         ->where('status', 1)
         ->select("id", "product_name", "default_price")
@@ -49,7 +49,7 @@ class CartController extends Controller
         }else {
             $price = (float)$product->default_price;
         }
-        
+
         if(!is_numeric($price)) {
             $price = 0;
         }
@@ -57,18 +57,16 @@ class CartController extends Controller
         $temp_arr = [
             "product" => $product,
             "qty" => $qty,
-            "price" => $price 
+            "price" => $price
         ];
 
         array_push($this->cart, collect($temp_arr));
         $this->cart_save();
-        
-    
     }
     public function cart_save() {
         Session::put('carts', $this->cart);
     }
-    
+
     public function cart_count()
     {
         $count = count($this->cart);
@@ -80,7 +78,7 @@ class CartController extends Controller
         $total = 0;
         foreach ($this->cart as $value) {
             // if($value['product']->id == $id)
-            
+
             if(is_numeric($value['price'])) {
                 $total += $value['price'] * $value['qty'];
             }else {
@@ -97,6 +95,7 @@ class CartController extends Controller
                 $value['qty']+= 1;
             }
         }
+        $this->cart_save();
         return $this->cart;
     }
     public function qty_decrease($id) {
@@ -108,17 +107,19 @@ class CartController extends Controller
                 }
             }
         }
+        $this->cart_save();
         return $this->cart;
     }
     public function remove($id) {
         foreach ($this->cart as $key => $value) {
             if($value['product']->id == $id)
             {
-                array_splice($this->cart, $key, 1);
-                Session::put('carts', $this->cart);
+                // array_splice($this->cart, $key, 1);
+                unset($this->cart[$key]);
+                $this->cart = array_values($this->cart);
             }
         }
-        
+        $this->cart_save();
         return $this->cart;
     }
 
@@ -137,6 +138,7 @@ class CartController extends Controller
                 }
             }
         }
+        $this->cart_save();
         return $this->cart;
     }
 

@@ -25,7 +25,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => '', 'namespace' => "Livewire"], function () {
-    Route::get('/', "Home");
+    Route::get('/', "Test\TestPage1")->name('test_1');
+    Route::get('/t2', "Test\TestPage2")->name('test_2');
+    Route::get('/show/{id}', "Test\TestPageShow")->name('show');
+
+
+    // Route::get('/', "Home");
     Route::get('/contact', "Contact");
     Route::get('/cart', "Cart");
     Route::get('/checkout', "Checkout");
@@ -58,7 +63,7 @@ Route::prefix('')->namespace('Controllers')->group(function () {
     Route::post('add_to_cart', 'WebsiteController@add_to_cart');
     Route::get('clear_cart', 'WebsiteController@clear_cart');
     Route::get('cart_all', 'WebsiteController@cart_all');
-    
+
     Route::get('/category/{slug}/{id}/products', 'WebsiteController@category_products')->name('website_category_products');
 
     Route::get('/get-category-product/{category_id}/{chunk_size}/{chunk_no}/json', 'JsonController@get_category_product')->name('get_category_product_json');
@@ -89,7 +94,7 @@ Route::prefix('')->namespace('Controllers')->group(function () {
         Route::post('/set-theme', 'AdminController@set_theme')->name('admin_set_theme');
     });
 
-    
+
 
     // user management
     Route::group([

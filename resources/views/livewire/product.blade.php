@@ -1,12 +1,12 @@
 <div class="{{ isset($class)? $class : "col-md-3" }} mb-4" :wire:key="{{ $product->id }}">
-    @if (isset($product))    
+    @if (isset($product))
     @php
         $data = [
             "id" => $product->id,
             "product_name" => \Illuminate\Support\Str::slug($product->product_name)
         ];
     @endphp
-    
+
     <div class="product-item product-item-border custom-product-item">
         <a class="product-item-thumb" href="{{ route('product_details', $data) }}">
             @if (count($product->related_images) > 0)
@@ -17,7 +17,7 @@
             <span class="badges">-{{ $product->discounts['discount_percent'] }}%</span>
         @endif
         <div class="product-item-action">
-            
+
             <button type="button" type="button" onclick="showQuickView({{ $product->id }})" data-bs-toggle="modal" data-bs-target="#action-QuickViewModal" class="product-action-btn action-btn-quick-view">
                 <i class="icon-magnifier"></i>
             </button>
@@ -41,10 +41,14 @@
                         @endif
                     @endif
                 </div>
-                <button type="button" onclick="addToCart({{ $product->id }})" class="info-btn-cart me-4 mb-4"><i class="icon-handbag"></i></button>
+                <button type="button"
+                    onclick="Livewire.emitTo('cart-count','cartAdded',{{ $product->id }})"
+                    class="info-btn-cart me-4 mb-4">
+                    <i class="icon-handbag"></i>
+                </button>
             </div>
         </div>
     </div>
-    
+
     @endif
 </div>

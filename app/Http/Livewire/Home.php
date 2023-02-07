@@ -12,13 +12,13 @@ class Home extends Component
 
     public function search()
     {
-        
+
     }
 
     public function render()
     {
         $this->categories = Category::where('parent_id', 0)->select('id', 'name')->get();
-  
+
         return view('livewire.home')
         ->extends('frontend.layout', [
             'meta' => [],

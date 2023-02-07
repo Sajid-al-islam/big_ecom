@@ -41,6 +41,7 @@ class WebsiteController extends Controller
     public function clear_cart()
     {
         session()->forget('carts');
+        return redirect('/');
     }
 
     public function single_product_details($id)

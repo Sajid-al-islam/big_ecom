@@ -8,7 +8,7 @@ use Livewire\Component;
 class Products extends Component
 {
     public $products;
-    
+
     public function __construct() {
         $this->products = [];
     }
