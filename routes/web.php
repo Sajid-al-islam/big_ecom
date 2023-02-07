@@ -28,6 +28,7 @@ Route::group(['prefix' => '', 'namespace' => "Livewire"], function () {
     Route::get('/', "Test\TestPage1")->name('test_1');
     Route::get('/t2', "Test\TestPage2")->name('test_2');
     Route::get('/show/{id}', "Test\TestPageShow")->name('show');
+    Route::get('/search', "Test\TestSearchResult")->name('search_result');
 
 
     // Route::get('/', "Home");
