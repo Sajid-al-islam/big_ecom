@@ -100,7 +100,7 @@
                                     {{-- <a class="main-nav-link" href="{{ route('category_product', $data) }}" >
                                         {{ $category->name }}
                                     </a> --}}
-                                    <a class="main-nav-link" href="#" >
+                                    <a class="main-nav-link" href="{{ route('category_product', $data) }}" >
                                         {{ $category->name }}
                                     </a>
                                 </li>

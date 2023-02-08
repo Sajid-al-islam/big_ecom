@@ -27,7 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix' => '', 'namespace' => "Livewire"], function () {
     Route::get('/', "Home");
     // Route::get('/contact', "Contact");
-    // Route::get('/cart', "Cart");
+    Route::get('/cart', "Cart");
     // Route::get('/checkout', "Checkout");
     // Route::get('/login', "Login")->name('website_login');
     // Route::get('/register', "Register")->name('website_register');
@@ -42,7 +42,7 @@ Route::group(['prefix' => '', 'namespace' => "Livewire"], function () {
     // });
     // Route::get('/order-complete', "OrderComplete");
     Route::get('/product/{id}/{product_name}', ProductDetails::class)->name('product_details');
-    // Route::get('/category/{id}/{category_name}', CategoryProduct::class)->name('category_product');
+    Route::get('/category/{id}/{category_name}', CategoryProduct::class)->name('category_product');
     // Route::get('/product/search/{search}', SearchProduct::class)->name('search_product');
     // Route::any('/search-product/{search}', SearchProduct::class)->name('search_product');
     // Route::get('/offer/prodcuts', OfferProducts::class)->name('offer_products');
