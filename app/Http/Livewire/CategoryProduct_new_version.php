@@ -10,7 +10,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class CategoryProduct extends Component
+class CategoryProduct_copy extends Component
 {
     protected $products_query = null;
     protected $products = null;

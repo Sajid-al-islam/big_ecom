@@ -9,7 +9,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class CategoryProduct extends Component
+class CategoryProduct_2 extends Component
 {
     protected $products_query=null;
     protected $products=null;
