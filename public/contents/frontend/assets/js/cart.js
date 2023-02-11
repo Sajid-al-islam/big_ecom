@@ -1,3 +1,4 @@
+var test = "something";
 function addToCart(product_id, qty=1) {
     fetch("/add_to_cart", {
         method: "POST",
@@ -135,6 +136,7 @@ function reviewSubmit(event) {
 
     document.getElementById("review_description").value = "";
 }
+
 
 $("#login_modal").addClass('d-none');
 $('#bkash_btn').change(function () {

@@ -34,30 +34,48 @@ class CategoryProduct extends Component
         if (!strpos(url()->full(), 'livewire')) {
             session()->put('page_url',  explode('?', url()->full())[0]);
         }
+        $previous_category = session()->get('category_id');
 
         $this->sub_categories = Category::where('parent_id', $id)->select('id', 'name')->get();
-        $this->getProducts();
-        $this->getBrands();
-        
-        if (session()->has('brand_id')) {
-            $this->brand_id = session()->get('brand_id');
-            $this->filterBrand($this->brand_id);
-        } elseif (!session()->has('brand_id') &&  session()->has('min_price') && session()->has('max_price')) {
-            $price_filter = [
-                'min_price' => session()->get('min_price'),
-                'max_price' => session()->get('max_price')
-            ];
-            $this->getPriceProduct($price_filter);
-        } elseif (session()->has('brand_id') && session()->has('min_price') && session()->has('max_price')) {
-            $price_filter = [
-                'min_price' => session()->has('min_price'),
-                'max_price' => session()->has('max_price')
-            ];
-            $brand_id = session()->get('brand_id');
-            $this->get_filter_product($brand_id, $price_filter);
-        } 
 
-        
+        if(isset($previous_category) && $previous_category !== $this->category_id) {
+            session()->remove('category_id');
+            session()->remove('brand_id');
+            session()->remove('min_price');
+            session()->remove('max_price');
+            
+            $this->getProducts();
+            $this->getBrands();
+        }
+        else if(!isset($previous_category)) {
+            session()->remove('category_id');
+            session()->remove('brand_id');
+            session()->remove('min_price');
+            session()->remove('max_price');
+            
+            $this->getProducts();
+            $this->getBrands();
+        }
+        else {
+            if (session()->has('brand_id')) {
+                $this->brand_id = session()->get('brand_id');
+                $this->getBrands();
+                $this->filterBrand($this->brand_id);
+            } elseif (!session()->has('brand_id') && session()->has('min_price') && session()->has('max_price')) {
+                $price_filter = [
+                    'min_price' => session()->get('min_price'),
+                    'max_price' => session()->get('max_price')
+                ];
+                $this->getPriceProduct($price_filter);
+            } elseif (session()->has('brand_id') && session()->has('min_price') && session()->has('max_price')) {
+                $price_filter = [
+                    'min_price' => session()->has('min_price'),
+                    'max_price' => session()->has('max_price')
+                ];
+                $brand_id = session()->get('brand_id');
+                $this->get_filter_product($brand_id, $price_filter);
+            } 
+        }
     }
 
     public function hydrate()
@@ -68,7 +86,9 @@ class CategoryProduct extends Component
 
     public function filterBrand($brand_id)
     {
-        session()->put('brand_id', $this->brand_id);
+        
+        session()->put('brand_id', $brand_id);
+        session()->put('category_id', $this->category_id);
         $category_id = $this->category_id;
         $products_query = Product::whereExists(function ($query) use ($category_id) {
             $query->from('category_product')
@@ -103,7 +123,14 @@ class CategoryProduct extends Component
             "min_price" => $formData['min_price'],
             "max_price" => $formData['max_price']
         ];
-        $this->getPriceProduct($price_filter);
+        $this->products_query = Product::whereExists(function ($query) {
+            $query->from('category_product')
+                ->whereColumn('category_product.product_id', 'products.id')
+                ->where('category_product.category_id', $this->category_id);
+        })->whereBetween('default_price', [(int) $price_filter['min_price'], (int) $price_filter['max_price']]);
+        // $this->getBrands();
+        $this->products = $this->products_query->paginate(18);
+        $this->make_paginate();
     }
 
     public function getProducts()
@@ -195,6 +222,7 @@ class CategoryProduct extends Component
         // $pagination_links = str_replace("livewire/message/", "", $pagination_links);
         // $pagination_links = str_replace(url('')."/category-product?", $url."?", $pagination_links);
         // dump($this->products);
+        
         return view('livewire.category-product', [
             'all_products' => $this->products,
         ])

@@ -104,7 +104,11 @@
                                 
                                 @foreach ($brands as $key=>$item)    
                                     <div class="filter-form-check">
-                                        <input class="filter-form-check-input" wire:click="filterBrand({{ $item->id }})" value="{{ $item->id }}" name="brand_checkbox" type="radio" id="filterBrandcheck{{$key}}">
+                                        @if(isset($brand_id) && $item->brand_id == $brand_id) 
+                                            <input class="filter-form-check-input" checked wire:click="filterBrand({{ $item->brand_id }})" value="{{ $item->id }}" name="brand_checkbox" type="radio" id="filterBrandcheck{{$key}}">
+                                        @else
+                                            <input class="filter-form-check-input" wire:click="filterBrand({{ $item->brand_id }})" value="{{ $item->id }}" name="brand_checkbox" type="radio" id="filterBrandcheck{{$key}}">
+                                        @endif
                                         <label class="filter-form-check-label"  for="filterBrandcheck{{$key}}">{{ $item->name }}</label>
                                     </div>
                                 @endforeach
@@ -120,11 +124,11 @@
                                                 <form wire:submit.prevent="PriceFilter(Object.fromEntries(new FormData($event.target)))">
                                                     <div class="col-6">
                                                         <label for="filter_from mb-2"><b>min</b></label>
-                                                        <input type="number" wire:model="min_price" class="form-control" name="min_price" id="filter_from">
+                                                        <input type="number" class="form-control" name="min_price" id="filter_from">
                                                     </div>
                                                     <div class="col-6 mb-3">
                                                         <label for="filter_to mb-2"><b>max</b></label>
-                                                        <input type="number" wire:model="max_price" class="form-control" name="max_price" id="filter_to">
+                                                        <input type="number" class="form-control" name="max_price" id="filter_to">
                                                     </div>
                                                     <div class="d-grid">
                                                         <button type="submit" class="btn btn-primary">filter</button>
