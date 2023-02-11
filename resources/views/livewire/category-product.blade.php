@@ -101,18 +101,7 @@
                                     <input class="filter-form-check-input" type="checkbox" id="filterSizeChecked1">
                                     <label class="filter-form-check-label" for="filterSizeChecked1">All</label>
                                 </div>
-                                @php
-                                    $brands = \App\Models\Brand::whereExists(function ($query)  use ($category_id) {
-                                        $query->from('products')
-                                            ->select('id','brand_id')
-                                            ->whereColumn('products.brand_id', 'brands.id')
-                                            ->whereExists(function ($q) use ($category_id) {
-                                                $q->from('category_product')
-                                                    ->whereColumn('category_product.product_id', 'products.id')
-                                                    ->where('category_product.category_id', $category_id);
-                                            });
-                                    })->select('id','name')->get();
-                                @endphp
+                                
                                 @foreach ($brands as $key=>$item)    
                                     <div class="filter-form-check">
                                         <input class="filter-form-check-input" wire:click="filterBrand({{ $item->id }})" value="{{ $item->id }}" name="brand_checkbox" type="radio" id="filterBrandcheck{{$key}}">

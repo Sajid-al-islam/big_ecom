@@ -62,8 +62,8 @@ class CategoryProduct extends Component
 
     public function hydrate()
     {
-        // $this->getBrands();
-        dd('adsf');
+        $this->getBrands();
+        // dd('adsf');
     }
 
     public function filterBrand($brand_id)
@@ -147,17 +147,41 @@ class CategoryProduct extends Component
     public function getBrands()
     {
         $category_id = $this->category_id;
-        $this->brands = Brand::whereExists(function ($query)  use ($category_id) {
-            $query->from('products')
-                ->select('id','brand_id')
-                ->whereColumn('products.brand_id', 'brands.id')
-                ->whereExists(function ($q) use ($category_id) {
-                    $q->from('category_product')
-                        ->whereColumn('category_product.product_id', 'products.id')
-                        ->where('category_product.category_id', $category_id);
-                });
-        })->select('id','name')->get();
-        // dd($this->products_query->pluck('id'));
+        // $this->brands = Brand::whereExists(function ($query)  use ($category_id) {
+        //     $query->from('products')
+        //         ->select('id','brand_id')
+        //         ->whereColumn('products.brand_id', 'brands.id')
+        //         ->whereExists(function ($q) use ($category_id) {
+        //             $q->from('category_product')
+        //                 ->whereColumn('category_product.product_id', 'products.id')
+        //                 ->where('category_product.category_id', $category_id);
+        //         });
+        // })->select('id','name')->get();
+
+        // $this->brands = Brand::whereExists(function ($q1) use ($category_id) {
+        //     $q1->from('product_brands')
+        //     ->whereColumn('brands.id', 'product_brands.brand_id')
+        //     ->whereExists(function ($q2) use ($category_id) {
+        //         $q2->from('category_product')
+        //         ->whereColumn('category_product.product_id', 'product_brands.product_id')
+        //         ->where('category_product.category_id', $category_id);
+        //     });
+        // })->select('id','name')->get();
+
+        // $this->brands = DB::table('category_product')->where('category_id', $category_id)
+        // ->whereExists(function ($q1) use ($category_id) {
+        //     $q1->from('product_brands')
+        //     ->whereColumn('product_brands.product_id', 'category_product.product_id');
+        // })->get();
+
+        $this->brands = DB::table('category_product')
+        ->join('product_brands', 'category_product.product_id', '=', 'product_brands.product_id')
+        ->join('brands', 'brands.id', '=','product_brands.brand_id')
+        ->select('category_product.*', 'product_brands.*', 'brands.name')
+        ->where('category_id', $this->category_id)
+        ->get()->unique('brand_id');
+
+        
         // $brand_id = $this->products_query->pluck('brand_id');
         // $this->brands = Brand::whereIn('id', $brand_id)->get();
     }

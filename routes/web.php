@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\WebsiteController;
+use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -247,4 +250,19 @@ Route::prefix('')->namespace('Controllers')->group(function () {
     })->name('route name');
 });
 
+// Route::get('move_brand_product', function() {
+//     DB::table('product_brands')->truncate();
+//     $products = new Product;
+//     $products = $products->select('id', 'brand_id')->get();
+//     // dd($products);
+//     foreach($products as $item) {
+//         DB::table('product_brands')->insert([
+//             "product_id" => $item->id,
+//             "brand_id" => $item->brand_id,
+//             "created_at" => Carbon::now(),
+//             "updated_at" => Carbon::now()
+//         ]);
+//     }
+//     return redirect('/');
+// });
 
