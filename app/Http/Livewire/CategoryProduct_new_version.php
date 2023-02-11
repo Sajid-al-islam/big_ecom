@@ -15,7 +15,6 @@ class CategoryProduct extends Component
     protected $products_query = null;
     protected $products = null;
     protected $brand_products_query = null;
-    protected $previous_category = null;
     public $category_id;
     public $min_price = 1;
     public $max_price = 0;
@@ -32,76 +31,76 @@ class CategoryProduct extends Component
         $this->category_id = $id;
         $this->category_name = $category_name;
 
-        // if (!strpos(url()->full(), 'livewire')) {
-        //     session()->put('page_url',  explode('?', url()->full())[0]);
-        // }
-        $this->previous_category = session()->get('category_id');
+        if (!strpos(url()->full(), 'livewire')) {
+            session()->put('page_url',  explode('?', url()->full())[0]);
+        }
+        $previous_category = session()->get('category_id');
 
         $this->sub_categories = Category::where('parent_id', $id)->select('id', 'name')->get();
         // dd(session()->all());
-
-        // initial check not filter added
-        if($this->checkBrandAndPrice()) {
-            $this->brand_id = session()->get('brand_id');
-            $price_range = [
-                'min_price' => session()->get('min_price'),
-                'max_price' => session()->get('max_price')
-            ];
-            
-            $this->get_filter_product($this->brand_id, $price_range);
-            $this->getBrands();
-        }
         
-        elseif($this->checkBrand()) {
-            
-            $this->brand_id = session()->get('brand_id');
-            $this->filterBrand($this->brand_id);
+        // initial check not filter added
+        if($previous_category == null &&  $previous_category == $this->category_id && !session()->has('brand_id') && !session()->has('min_price') && !session()->has('max_price')) {
+            session()->remove('category_id');
+            session()->remove('brand_id');
+            session()->remove('min_price');
+            session()->remove('max_price');
+            dd('from init');
+            $this->getProducts();
             $this->getBrands();
         }
-        elseif($this->checkOnlyPrice()) {
-            $price_range = [
-                'min_price' => session()->get('min_price'),
-                'max_price' => session()->get('max_price')
-            ];
-            $this->PriceFilter($price_range);
-            $this->getBrands();
-        }
-        elseif($this->previous_category == $this->category_id) {
+
+        // check if there was a filter in the previous category, if not load manual data
+        if(isset($previous_category) && $previous_category !== $this->category_id) {
+            session()->remove('category_id');
+            session()->remove('brand_id');
+            session()->remove('min_price');
+            session()->remove('max_price');
+            dd('from not matched');
             $this->getProducts();
             $this->getBrands();
         }
         else {
-            session()->forget('category_id');
-            session()->forget('brand_id');
-            session()->forget('min_price');
-            session()->forget('max_price');
+            // filter section
+            dd('from filtered else');
             $this->getProducts();
             $this->getBrands();
-        }
-    }
+            // checking if any brand is present in the filter
+            if (session()->has('brand_id')) {
+                dd('frome else brnad', session()->all());
 
-    public function checkBrand()
-    {
-        if(session()->has('brand_id') && !session()->has('min_price') && !session()->has('max_price') && $this->previous_category == $this->category_id) {
-            return true;
-        }else {
-            return false;
-        }
-    }
-    public function checkOnlyPrice()
-    {
-        if(!session()->has('brand_id') && session()->has('min_price') && session()->has('max_price') && $this->previous_category == $this->category_id) {
-            return true;
-        }else {
-            return false;
-        }
-    }
-    public function checkBrandAndPrice()
-    {
-        if(session()->has('brand_id') && session()->has('min_price') && $this->previous_category == $this->category_id) {
-            return true;
-        }else {
-            return false;
+                $this->brand_id = session()->get('brand_id');
+                $this->getBrands();
+                $this->filterBrand($this->brand_id);
+            } elseif (!session()->has('brand_id') && session()->has('min_price') && session()->has('max_price')) {
+                // checking if brand not present and min price and max price present in the filter
+                dump('frome else price', session()->all());
+                
+                $price_filter = [
+                    'min_price' => session()->get('min_price'),
+                    'max_price' => session()->get('max_price')
+                ];
+                $this->min_price = session()->get('min_price');
+                $this->max_price = session()->get('min_price');
+                if($this->min_price == "" && $this->max_price == "") {
+                    session()->remove('min_price');
+                    session()->remove('max_price');
+                }
+                // dd('dd from min max', session()->all());
+                $this->getBrands();
+                $this->getPriceProduct($price_filter);
+            } elseif (session()->has('brand_id') && session()->has('min_price') && session()->has('max_price')) {
+                // checking if both brand and min, max price present in the filter
+                dd('hello from both');
+
+                $price_filter = [
+                    'min_price' => session()->get('min_price'),
+                    'max_price' => session()->get('max_price')
+                ];
+                $this->getBrands();
+                $brand_id = session()->get('brand_id');
+                $this->get_filter_product($brand_id, $price_filter);
+            } 
         }
     }
 
@@ -143,25 +142,23 @@ class CategoryProduct extends Component
     public function PriceFilter($formData)
     {
         session()->put('category_id', $this->category_id);
+
+        session()->put('min_price', $formData['min_price']);
+        session()->put('max_price', $formData['max_price']);
+
+        $this->min_price  = session()->has('min_price') ? session()->get('min_price') : $formData['min_price'];
+        $this->max_price  = session()->has('max_price') ? session()->get('max_price') : $formData['max_price'];
+        
         $price_filter = [
             "min_price" => $formData['min_price'],
             "max_price" => $formData['max_price']
         ];
-        session()->put('min_price',  $formData['min_price']);
-        session()->put('max_price',  $formData['max_price']);
-
         $this->products_query = Product::whereExists(function ($query) {
             $query->from('category_product')
                 ->whereColumn('category_product.product_id', 'products.id')
                 ->where('category_product.category_id', $this->category_id);
-        })
-        ->whereBetween('default_price', [(int) $price_filter['min_price'], (int) $price_filter['max_price']]);
-
-        if(session()->has('brand_id')) {
-            $brand_id = session()->get('brand_id');
-            $this->products_query->where('brand_id', $brand_id);
-        }
-        
+        })->whereBetween('default_price', [(int) $price_filter['min_price'], (int) $price_filter['max_price']]);
+        // $this->getBrands();
         $this->products = $this->products_query->paginate(18);
         $this->make_paginate();
     }
@@ -181,14 +178,12 @@ class CategoryProduct extends Component
     public function get_filter_product($brand_id, $price_range)
     {
         session()->put('category_id', $this->category_id);
-        session()->put('min_price',  $price_range['min_price']);
-        session()->put('max_price',  $price_range['max_price']);
         $this->products_query = Product::whereExists(function ($query) {
             $query->from('category_product')
                 ->whereColumn('category_product.product_id', 'products.id')
                 ->where('category_product.category_id', $this->category_id);
         })
-            ->where('brand_id', $brand_id)
+            ->whereIn('brand_id', $brand_id)
             ->whereBetween('default_price', [(int) $price_range['min_price'], (int) $price_range['max_price']]);
         // $this->getBrands();
         $this->products = $this->products_query->paginate(18);

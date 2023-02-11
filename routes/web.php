@@ -250,6 +250,9 @@ Route::prefix('')->namespace('Controllers')->group(function () {
     })->name('route name');
 });
 
+Route::get('clear_session', function() {
+    session()->flush();
+});
 // Route::get('move_brand_product', function() {
 //     DB::table('product_brands')->truncate();
 //     $products = new Product;
