@@ -109,6 +109,7 @@ document.addEventListener("turbolinks:load", function(event) {
         window.livewire.restart();
         console.log("reload", window.dom_load_count);
     }
+    ReviewFunctions();
     window.dom_load_count++;
     // let wire_els = [...document.querySelectorAll('div.border.border-danger')]
     // wire_els.forEach(i=>{

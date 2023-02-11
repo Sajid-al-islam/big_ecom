@@ -213,6 +213,9 @@
                 
                 // });
             </script>
+            <script>
+                ReviewFunctions();
+            </script>
         @endif
         
     </div>

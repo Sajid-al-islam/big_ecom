@@ -1,4 +1,3 @@
-var test = "something";
 function addToCart(product_id, qty=1) {
     fetch("/add_to_cart", {
         method: "POST",
@@ -137,7 +136,6 @@ function reviewSubmit(event) {
     document.getElementById("review_description").value = "";
 }
 
-
 $("#login_modal").addClass('d-none');
 $('#bkash_btn').change(function () {
     $('#bkash_section').removeClass('d-none');
@@ -157,13 +155,18 @@ $('#cod_btn').change(function () {
 });
 
 function error_response(data) {
+    let object = data.data;
+    window.render_error(object);
+    throw data;
+}
+
+window.render_error = (object)=>{
     // console.log(data);
     $('.loader_body').removeClass('active');
     $('form button').prop('disabled',false);
     $('#backend_body .main_content').css({overflowY:'scroll'});
     // whatever you want to do with the error
     // console.log(error.response.data.errors);
-    let object = data.data;
     $(`label`).siblings(".text-danger").remove();
     $(`select`).siblings(".text-danger").remove();
     $(`input`).siblings(".text-danger").remove();
@@ -221,5 +224,4 @@ function error_response(data) {
     }
 
     window.s_alert('error',data.err_message)
-    throw data;
 }

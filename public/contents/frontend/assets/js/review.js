@@ -1,13 +1,24 @@
-$("#website_register").hide();
-$("#register_btn_link").click(function () {
-    $("#website_login").hide();    
-    $("#website_register").show();    
-});
+function ReviewFunctions() {
+    $("#login_modal").addClass('d-none');
+    $("#website_register").off().hide();
+    $("#register_btn_link").off().click(function () {
+        $("#website_login").hide();    
+        $("#website_register").show();    
+    });
 
-$("#login_btn_link").click(function () {
-    $("#website_login").show();    
-    $("#website_register").hide();    
-});
+    $("#login_btn_link").off().click(function () {
+        $("#website_login").show();    
+        $("#website_register").hide();    
+    });
+    
+    login();
+    register();
+    reviewSubmit();
+    $("#login_modal").addClass('d-none');
+}
+
+ReviewFunctions();
+
 function login() {
     event.preventDefault();
     let formData = new FormData(event.target);
@@ -98,5 +109,3 @@ function reviewSubmit() {
     })
     
 }
-
-$("#login_modal").addClass('d-none');
