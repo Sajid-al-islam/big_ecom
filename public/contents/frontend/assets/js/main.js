@@ -2,12 +2,14 @@
     "use strict";
 
     // Css Function Js
+    
     const bgSelector = $("[data-bg-img]");
     bgSelector.each(function (index, elem) {
         let element = $(elem),
             bgSource = element.data('bg-img');
         element.css('background-image', 'url(' + bgSource + ')');
     });
+    
 
     const Bgcolorcl = $("[data-bg-color]");
     Bgcolorcl.each(function (index, elem) {
@@ -129,3 +131,12 @@
 
 
 })(window.jQuery);
+
+function dynamicCss() {
+    const bgSelector = $("[data-bg-img]");
+    bgSelector.each(function (index, elem) {
+        let element = $(elem),
+            bgSource = element.data('bg-img');
+        element.css('background-image', 'url(' + bgSource + ')');
+    });
+}

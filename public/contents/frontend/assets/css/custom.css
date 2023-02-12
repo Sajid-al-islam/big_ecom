@@ -113,15 +113,18 @@
     size: A4 portrait;
   }
   #print_body {
-    position: fixed;
     width: 100vw;
     top: 0;
     left: 0;
     margin: 0;
     padding: 0;
     z-index: 9999;
-    box-shadow: none;
+    box-shadow: unset;
+    border-radius: unset;
     padding: 0px !important;
+  }
+  .pagebreak {
+    page-break-after: always;
   }
   .card {
     box-shadow: none !important;
@@ -136,6 +139,9 @@
     display: none !important;
   }
   .print_btn {
+    display: none !important;
+  }
+  footer {
     display: none !important;
   }
 }

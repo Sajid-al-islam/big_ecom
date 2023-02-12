@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class OrderDetails extends Model
 {
     use HasFactory;
+    protected $appends = [
+        "product_name"
+    ];
+
+    public function getProductNameAttribute()
+    {
+        return Product::where('id', $this->product_id)->select('product_name')->first();
+    }
 }

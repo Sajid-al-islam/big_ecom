@@ -138,13 +138,10 @@
                                 <h4 class="widget-title widget-collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#widgetTitleId-1">Information</h4>
                                 <div id="widgetTitleId-1" class="collapse widget-collapse-body">
                                     <ul class="widget-nav">
-                                        <li><a href="#">About us</a></li>
-                                        <li><a href="#">Delivery information</a></li>
-                                        <li><a href="#">Privacy Policy</a></li>
-                                        <li><a href="#">Sales</a></li>
-                                        <li><a href="#">Terms & Conditions</a></li>
-                                        <li><a href="#">Shipping Policy</a></li>
-                                        <li><a href="#">EMI Payment</a></li>
+                                        <li><a href="{{ route('about_us') }}">About us</a></li>
+                                        <li><a href="{{ route('privacy_policy') }}">Privacy Policy</a></li>
+                                        <li><a href="{{ route('terms_and_condition') }}">Terms & Conditions</a></li>
+                                        <li><a href="{{ route('refund_policy') }}">Refund Policy</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -155,13 +152,10 @@
                                 <h4 class="widget-title widget-collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#widgetTitleId-2">Account</h4>
                                 <div id="widgetTitleId-2" class="collapse widget-collapse-body">
                                     <ul class="widget-nav">
-                                        <li><a href="#">My account</a></li>
-                                        <li><a href="#">My orders</a></li>
-                                        <li><a href="#">Returns</a></li>
-                                        <li><a href="#">Shipping</a></li>
-                                        <li><a href="#">Wishlist</a></li>
-                                        <li><a href="#">How Does It Work</a></li>
-                                        <li><a href="#">Merchant Sign Up</a></li>
+                                        <li><a href="{{ route('frontend.profile') }}">My account</a></li>
+                                        <li><a href="{{ route('frontend.orders') }}">My orders</a></li>
+                                        <li><a href="{{ route('frontend.reviews') }}">My Reviews</a></li>
+                                        <li><a href="{{ route('frontend.address') }}">Shipping Address</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -172,13 +166,10 @@
                                 <h4 class="widget-title widget-collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#widgetTitleId-3">Store</h4>
                                 <div id="widgetTitleId-3" class="collapse widget-collapse-body">
                                     <ul class="widget-nav">
-                                        <li><a href="#">Affiliate</a></li>
-                                        <li><a href="#">Bestsellers</a></li>
-                                        <li><a href="#">Discount</a></li>
-                                        <li><a href="#">Latest products</a></li>
-                                        <li><a href="#">Sale</a></li>
-                                        <li><a href="#">All Collection</a></li>
-                                        <li><a href="#">Contact Us</a></li>
+                                        <li><a href="{{ route('offer_products') }}">Discount</a></li>
+                                        <li><a href="/">Latest products</a></li>
+                                        <li><a href="/category/47/laptop">All Collection</a></li>
+                                        <li><a href="{{ route('contact_us') }}">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>

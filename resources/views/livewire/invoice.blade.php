@@ -33,19 +33,22 @@
         }
     </style>
     {{-- The best athlete wants his opponent at his best. --}}
-    
-    <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding" id="print_body">
-        
-        <div class="justify-content-end mb-5">
-            <button class="btn btn-primary print_btn" onclick="window.print()">Print</button>
+    <div class="row">
+        <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 mt-5">
+            <div class="d-flex justify-content-between mb-5 print_btn">
+                <button class="btn btn-primary" onclick="window.print()">Print</button>
+                <a class="btn btn-primary" href="{{ route('frontend.orders') }}">back</a>
+            </div>
         </div>
+    </div>
+    <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding" id="print_body">    
         
         <div class="card">
             <div class="card-header p-4">
                 <a class="pt-2 d-inline-block" href="/" data-abc="true">Ctgcomputer</a>
                 <div class="float-right">
-                    <h3 class="mb-0">Invoice #BBB10234</h3>
-                    Date: 12 Jun,2019
+                    <h3 class="mb-0">Invoice #{{ $order->invoice_id }}</h3>
+                    Date: {{ $order->created_at }}
                 </div>
             </div>
             <div class="card-body">
@@ -61,12 +64,12 @@
                     <div class="col-sm-6 ">
                         <h5 class="mb-3">To:</h5>
                         <h3 class="text-dark mb-1">
-                            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                            {{ $order->order_address->first_name }} {{ $order->order_address->last_name }}
                         </h3>
                         {{-- <div>478, Nai Sadak</div>
                         <div>Chandni chowk, New delhi, 110006</div> --}}
-                        <div>Email: {{ Auth::user()->email }}</div>
-                        <div>Phone: {{ Auth::user()->phone }}</div>
+                        <div>Email: {{ $order->order_address->email }}</div>
+                        <div>Phone: {{ $order->order_address->mobile_number }}</div>
                     </div>
                 </div>
                 <div class="table-responsive-sm">
@@ -75,78 +78,49 @@
                             <tr>
                                 <th class="center">#</th>
                                 <th>Item</th>
-                                <th>Description</th>
                                 <th class="right">Price</th>
                                 <th class="center">Qty</th>
                                 <th class="right">Total</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($order->order_details as $key => $product)
                             <tr>
-                                <td class="center">1</td>
-                                <td class="left strong">Iphone 10X</td>
-                                <td class="left">Iphone 10X with headphone</td>
-                                <td class="right">$1500</td>
-                                <td class="center">10</td>
-                                <td class="right">$15,000</td>
+                                <td class="center">{{ $key+1 }}</td>
+                                <td class="left strong">{{ $product->product_name->product_name }}</td>
+                                <td class="right">{{ number_format($product->product_price) }}</td>
+                                <td class="center">{{ $product->qty }}</td>
+                                <td class="right">{{ number_format($product->product_price * $product->qty) }}</td>
                             </tr>
-                            <tr>
-                                <td class="center">2</td>
-                                <td class="left">Iphone 8X</td>
-                                <td class="left">Iphone 8X with extended warranty</td>
-                                <td class="right">$1200</td>
-                                <td class="center">10</td>
-                                <td class="right">$12,000</td>
-                            </tr>
-                            <tr>
-                                <td class="center">3</td>
-                                <td class="left">Samsung 4C</td>
-                                <td class="left">Samsung 4C with extended warranty</td>
-                                <td class="right">$800</td>
-                                <td class="center">10</td>
-                                <td class="right">$8000</td>
-                            </tr>
-                            <tr>
-                                <td class="center">4</td>
-                                <td class="left">Google Pixel</td>
-                                <td class="left">Google prime with Amazon prime membership</td>
-                                <td class="right">$500</td>
-                                <td class="center">10</td>
-                                <td class="right">$5000</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
                 <div class="row">
-                    <div class="col-lg-8 col-xl-8 col-sm-7 col-md-7">
+                    <div class="col-lg-9 col-xl-9 col-sm-8 col-md-9 col-6">
                     </div>
-                    <div class="col-lg-4 col-xl-4 col-sm-5 col-md-5 ml-auto">
+                    <div class="col-lg-3 col-xl-3 col-sm-4 col-md-3 col-6 ml-auto">
                         <table class="table table-clear">
                             <tbody>
                                 <tr>
                                     <td class="left">
                                         <strong class="text-dark">Subtotal</strong>
                                     </td>
-                                    <td class="right">$28,809,00</td>
+                                    <td class="right">{{ number_format($order->sub_total) }}</td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <td class="left">
-                                        <strong class="text-dark">Discount (20%)</strong>
+                                        <strong class="text-dark">Discount</strong>
                                     </td>
-                                    <td class="right">$5,761,00</td>
-                                </tr>
-                                <tr>
-                                    <td class="left">
-                                        <strong class="text-dark">VAT (10%)</strong>
-                                    </td>
-                                    <td class="right">$2,304,00</td>
-                                </tr>
+                                    <td class="right">{{  }}</td>
+                                </tr> --}}
+                               
                                 <tr>
                                     <td class="left">
                                         <strong class="text-dark">Total</strong>
                                     </td>
                                     <td class="right">
-                                        <strong class="text-dark">$20,744,00</strong>
+                                        <strong class="text-dark">{{ number_format($order->total_price) }}</strong>
                                     </td>
                                 </tr>
                             </tbody>
@@ -154,7 +128,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer bg-white">
+            <div class="card-footer bg-white" style="margin: 30px 0px;">
                 <p class="mb-0">ctgcomputer.com, Computer City Centre (Multiplan), Level: 4, Shop: 407-409, 69-71 New Elephant Road</p>
             </div>
         </div>

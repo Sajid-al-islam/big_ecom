@@ -29,7 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix' => '', 'namespace' => "Livewire"], function () {
     Route::get('/', "Home");
-    Route::get('/contact', "Contact");
+    Route::get('/contact', "Contact")->name('contact_us');
     Route::get('/cart', "Cart");
     Route::get('/checkout', "Checkout");
     Route::get('/login', "Login")->name('website_login');
@@ -42,18 +42,22 @@ Route::group(['prefix' => '', 'namespace' => "Livewire"], function () {
         Route::get('/address', "Address")->name('frontend.address');
         Route::get('/account-details', "AccountDetails")->name('frontend.account_details');
         Route::get('/reset-password', "ResetPassword")->name('frontend.reset_password');
-        Route::get('/invoice', "Invoice")->name('frontend.invoice');
+        Route::get('/invoice/{id}', "Invoice")->name('frontend.invoice');
     });
     Route::get('/order-complete', "OrderComplete");
     Route::get('/product/{id}/{product_name}', ProductDetails::class)->name('product_details');
     Route::get('/category/{id}/{category_name}', CategoryProduct::class)->name('category_product');
     // Route::get('/product/search/{search}', SearchProduct::class)->name('search_product');
     Route::any('/search-product/{search}', SearchProduct::class)->name('search_product');
-    // Route::get('/offer/prodcuts', OfferProducts::class)->name('offer_products');
+    Route::get('/offer/prodcuts', OfferProduct::class)->name('offer_products');
     // Route::get('/product/quick_view/{id}', OfferProducts::class)->name('quick_view_product');
     // Route::get('/category-product/{id}', CategoryProduct::class)->name('category_product');
     // Route::get('/login', "Login");
     // Route::get('/register', "Register");
+    Route::get('/about-us', "AboutUs")->name('about_us');
+    Route::get('/privacy-policy', "PrivacyPolicy")->name('privacy_policy');
+    Route::get('/terms', "Terms")->name('terms_and_condition');
+    Route::get('/refund-policy', "RefundPolicy")->name('refund_policy');
 });
 
 
