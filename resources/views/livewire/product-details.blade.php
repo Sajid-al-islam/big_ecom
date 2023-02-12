@@ -18,12 +18,19 @@
                     <div class="col-lg-6">
                         <div class="product-detail-content">
                             <h2 class="product-detail-title mt-n1 me-10">{{ $product->product_name }}</h2>
-                            @if ($product->discounts)
-                                <div class="product-detail-price">{{ number_format($product->default_price-$product->discounts['discount_amount']) }} ৳ - <span class="price-old">{{ number_format($product->default_price) }} ৳</span></div>
+                            @if ($product->discounts && $product->discounts['discount_last_date'] > Carbon\Carbon::now())
+                                <div class="product-detail-price">
+                                    {{ number_format($product->default_price-$product->discounts['discount_amount']) }} ৳ - <span class="price-old">{{ number_format($product->default_price) }} ৳</span>
+                                </div>
                             @else
-                                <div class="product-detail-price">{{ number_format($product->default_price) }} ৳</div>
+                                @if (is_numeric($product->default_price))
+                                    <div class="product-detail-price">{{ number_format($product->default_price) }} ৳</div>
+                                @else
+                                    <div class="product-detail-price">{{ $product->default_price }}</div>
+                                @endif
+                                
                             @endif
-    
+
                             <div class="product-detail-review"> 
     
                                 @if ($product->reviews->avg('star') > 0)

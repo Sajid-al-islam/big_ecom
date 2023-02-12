@@ -14,8 +14,8 @@
                     <div class="col-auto d-flex justify-content-end align-items-center">
     
                         <form class="header-search-box d-none d-md-block" wire:submit.prevent="submitSearchPage">
-                            {{-- <input wire:model="searchQuery" wire:keyup="search_product" class="form-control" type="text" id="search" placeholder="Search Products" /> --}}
-                            <input  class="form-control" type="text" id="search" placeholder="Search Products" />
+                            <input wire:model="searchQuery" wire:keyup="search_product" class="form-control" type="text" id="search" placeholder="Search Products" />
+                            
                             <button type="submit" class="btn-src">
                                 <i class="icon-magnifier"></i>
                             </button>
@@ -30,7 +30,7 @@
                         
                         @livewire('components.cart-count')
                     </div>
-                    {{-- @if ($search_products)
+                    @if ($search_products)
                         <div class="search_result">
                             <div class="list-group list-group-flush">
                                 @foreach ($search_products as $item)
@@ -48,7 +48,7 @@
                                     <a href="{{ route('search_product', $searchQuery) }}" class="my-5 list-group-item list-group-item-action active text-center">View more</a>
                             </div>
                         </div>
-                    @endif --}}
+                    @endif
                 </div>
             </div>
         </div>

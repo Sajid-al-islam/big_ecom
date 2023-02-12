@@ -32,22 +32,22 @@ Route::group(['prefix' => '', 'namespace' => "Livewire"], function () {
     Route::get('/contact', "Contact");
     Route::get('/cart', "Cart");
     Route::get('/checkout', "Checkout");
-    // Route::get('/login', "Login")->name('website_login');
-    // Route::get('/register', "Register")->name('website_register');
+    Route::get('/login', "Login")->name('website_login');
+    Route::get('/register', "Register")->name('website_register');
 
-    // Route::group(['middleware' => ['frontend_auth_check']], function () {
-    //     Route::get('/profile', "Profile")->name('frontend.profile');
-    //     Route::get('/orders', "Orders")->name('frontend.orders');
-    //     Route::get('/review', "Review")->name('frontend.reviews');
-    //     Route::get('/address', "Address")->name('frontend.address');
-    //     Route::get('/account-details', "AccountDetails")->name('frontend.account_details');
-    //     Route::get('/reset-password', "ResetPassword")->name('frontend.reset_password');
-    // });
+    Route::group(['middleware' => ['frontend_auth_check']], function () {
+        Route::get('/profile', "Profile")->name('frontend.profile');
+        Route::get('/orders', "Orders")->name('frontend.orders');
+        Route::get('/my-reviews', "MyReviews")->name('frontend.reviews');
+        Route::get('/address', "Address")->name('frontend.address');
+        Route::get('/account-details', "AccountDetails")->name('frontend.account_details');
+        Route::get('/reset-password', "ResetPassword")->name('frontend.reset_password');
+    });
     Route::get('/order-complete', "OrderComplete");
     Route::get('/product/{id}/{product_name}', ProductDetails::class)->name('product_details');
     Route::get('/category/{id}/{category_name}', CategoryProduct::class)->name('category_product');
     // Route::get('/product/search/{search}', SearchProduct::class)->name('search_product');
-    // Route::any('/search-product/{search}', SearchProduct::class)->name('search_product');
+    Route::any('/search-product/{search}', SearchProduct::class)->name('search_product');
     // Route::get('/offer/prodcuts', OfferProducts::class)->name('offer_products');
     // Route::get('/product/quick_view/{id}', OfferProducts::class)->name('quick_view_product');
     // Route::get('/category-product/{id}', CategoryProduct::class)->name('category_product');
