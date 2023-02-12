@@ -49,6 +49,9 @@ class FrontendController extends Controller
 
         $order = new Order();
         $order->order_status = 'Pending';
+        if(Auth::user()) {
+            $order->user_id = Auth::user()->id;
+        }
         $order->total_price = $request->order_total;
         $order->sub_total = $request->cart_total;
         $order->total_discount = $request->total_discount;
@@ -74,6 +77,9 @@ class FrontendController extends Controller
 
         $order_info = new OrderAddress();
         $order_info->order_id = $order->id;
+        if(Auth::user()) {
+            $order_info->user_id = Auth::user()->id;
+        }
         $order_info->first_name = $request->first_name;
         $order_info->last_name = $request->last_name;
         $order_info->address = $request->address;
@@ -85,6 +91,9 @@ class FrontendController extends Controller
 
         $order_payment = new OrderPayment();
         $order_payment->order_id = $order->id;
+        if(Auth::user()) {
+            $order_payment->user_id = Auth::user()->id;
+        }
         $order_payment->payment_method = $request->payment_method;
         $order_payment->bkash_number = $request->bkash_number;
         $order_payment->bkash_trx_id = $request->bkash_trx_id;
@@ -97,6 +106,9 @@ class FrontendController extends Controller
 
         $order_delivery = new OrderDeliveryInfo();
         $order_delivery->order_id = $order->id;
+        if(Auth::user()) {
+            $order_delivery->user_id = Auth::user()->id;
+        }
         $order_delivery->delivery_method = $request->shipping_method;
         if($request->shipping_method == 'cod') {
             $order_delivery->delivery_cost = 0;
@@ -113,6 +125,9 @@ class FrontendController extends Controller
         foreach ($cart_products as $key => $product) {
             $order_details = new OrderDetails();
             $order_details->order_id = $order->id;
+            if(Auth::user()) {
+                $order_details->user_id = Auth::user()->id;
+            }
             $order_details->product_id = $product['product']->id;
             if(is_numeric($product['product']->default_price)) {
                 $order_details->product_price = $product['product']->default_price;

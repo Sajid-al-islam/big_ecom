@@ -34,7 +34,7 @@
                                                     <td>{{ $item->created_at }}</td>
                                                     <td>{{ $item->order_status }}</td>
                                                     <td>{{ $item->total_price }}</td>
-                                                    <td><a href="#" class="check-btn sqr-btn">View</a></td>
+                                                    <td><a href="{{ route('frontend.invoice') }}" class="check-btn sqr-btn">View</a></td>
                                                 </tr>
                                             @endforeach
                                         @else

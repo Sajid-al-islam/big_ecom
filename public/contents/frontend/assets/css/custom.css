@@ -108,6 +108,37 @@
     z-index: 9999;
   }
 }
+@media print {
+  @page {
+    size: A4 portrait;
+  }
+  #print_body {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 9999;
+    box-shadow: none;
+    padding: 0px !important;
+  }
+  .card {
+    box-shadow: none !important;
+  }
+  .footer-bottom {
+    display: none !important;
+  }
+  header {
+    display: none !important;
+  }
+  .logo-main {
+    display: none !important;
+  }
+  .print_btn {
+    display: none !important;
+  }
+}
 .product-detail-desc div,
 .product-detail-desc p,
 .product-detail-desc ul,
