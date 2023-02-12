@@ -132,11 +132,38 @@
 
 })(window.jQuery);
 
+
+function scrolltotop_reboot() {
+    $('.scroll-to-top').on('click', function () {
+        $('html, body').animate({
+            scrollTop: 0
+        }, 800);
+        return false;
+    });
+}
 function dynamicCss() {
     const bgSelector = $("[data-bg-img]");
     bgSelector.each(function (index, elem) {
         let element = $(elem),
             bgSource = element.data('bg-img');
         element.css('background-image', 'url(' + bgSource + ')');
+    });
+}
+
+function slider_reboot() {
+    var mainlSliderThree = new Swiper('.hero-five-slider-container', {
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+        loop: true,
+        speed: 700,
+        spaceBetween: 0,
+        effect: 'fade',
+        fadeEffect: {
+            crossFade: true,
+        },
+        pagination: {
+            el: '.hero-slide-five-pagination',
+            clickable: 'true',
+        }
     });
 }

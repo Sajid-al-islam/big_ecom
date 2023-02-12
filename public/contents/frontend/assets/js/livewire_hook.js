@@ -111,6 +111,8 @@ document.addEventListener("turbolinks:load", function(event) {
     }
     ReviewFunctions();
     dynamicCss();
+    slider_reboot();
+    scrolltotop_reboot();
     window.dom_load_count++;
     // let wire_els = [...document.querySelectorAll('div.border.border-danger')]
     // wire_els.forEach(i=>{
