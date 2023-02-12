@@ -29,7 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix' => '', 'namespace' => "Livewire"], function () {
     Route::get('/', "Home");
-    // Route::get('/contact', "Contact");
+    Route::get('/contact', "Contact");
     Route::get('/cart', "Cart");
     Route::get('/checkout', "Checkout");
     // Route::get('/login', "Login")->name('website_login');
@@ -75,8 +75,8 @@ Route::prefix('')->namespace('Controllers')->group(function () {
     Route::post('/logout', 'FrontendController@logout')->name('logout');
 
     // Auth::routes();
-    // Route::post('/website_login', 'FrontendController@website_login')->name('website_login');
-    // Route::post('/website_register', 'FrontendController@website_register')->name('website_register');
+    Route::post('/website_login', 'FrontendController@website_login')->name('website_login_api');
+    Route::post('/website_register', 'FrontendController@website_register')->name('website_register_api');
 
     Route::get('/get-auth-info',function(){
         return Auth::user();

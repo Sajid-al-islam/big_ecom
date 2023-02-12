@@ -39,16 +39,16 @@
 
     <!-- Vendors JS -->
     <script src="{{ asset('contents/frontend') }}/assets/js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('contents/frontend') }}/assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('contents/frontend') }}/assets/js/vendor/bootstrap.bundle.min.js" defer></script>
     <!-- Plugins JS -->
-    <script src="{{ asset('contents/frontend') }}/assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="{{ asset('contents/frontend') }}/assets/js/plugins/swiper-bundle.min.js" async defer></script>
 
 
     <!-- Custom Main JS -->
     <script src="{{ asset('contents/frontend') }}/assets/js/main.js" defer></script>
-    <script src="{{ asset('contents/frontend') }}/assets/js/livewire_hook.js" defer></script>
     <script src="{{ asset('contents/frontend') }}/assets/js/cart.js" defer></script>
     <script src="{{ asset('contents/frontend') }}/assets/js/review.js" defer></script>
+    <script src="{{ asset('contents/frontend') }}/assets/js/livewire_hook.js" defer></script>
     <script src="/js/frontend.js" defer></script>
     <script>
         const Toast = Swal.mixin({

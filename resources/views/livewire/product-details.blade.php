@@ -165,7 +165,7 @@
                                     </div>
                                 </div>   
                                 
-                                {{-- @livewire('reviews', ['product_id' => $product->id]) --}}
+                                @livewire('review', ['product_id' => $product->id])
     
                                 {{-- <div class="product-review-item">
                                     <div class="product-review-top">

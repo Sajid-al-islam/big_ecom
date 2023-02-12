@@ -1,5 +1,4 @@
 <div>
-    {{-- Close your eyes. Count to one. That is how long forever feels. --}}
     <div class="product-area section-space">
         <div class="container">
             <div class="row">
@@ -27,7 +26,7 @@
                                                 "product_name" => \Illuminate\Support\Str::slug($cart['product']->product_name)
                                             ];
                                         @endphp
-                                        <tr>
+                                        <tr wire:key="{{ $cart['product']['id'] }}">
                                             <td class="product-thumbnail">
                                                 <a href="{{ route('product_details', $data) }}">
                                                     @if ($cart['product']->related_image)

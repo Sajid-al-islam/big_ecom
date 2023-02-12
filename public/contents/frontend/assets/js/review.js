@@ -11,9 +11,9 @@ function ReviewFunctions() {
         $("#website_register").hide();    
     });
     
-    login();
-    register();
-    reviewSubmit();
+    // login();
+    // register();
+    // reviewSubmit();
     $("#login_modal").addClass('d-none');
 }
 
@@ -51,6 +51,7 @@ function login() {
 
 function register() {
     event.preventDefault();
+
     let formData = new FormData(event.target);
 
     fetch("/website_register", {
