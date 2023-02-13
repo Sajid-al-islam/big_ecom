@@ -65,7 +65,7 @@
                 
 
                 <!--== Start Product Categorie Item ==-->
-                <a href="category/50/gadget" class=" product-category-item">
+                <a href="category/57/gadget" class=" product-category-item">
                     <div class="product-category-thumb">
                         <img src="{{ asset('contents/frontend') }}/assets/images/shop/category/g7.jpg" width="101" height="101" alt="Image-HasTech">
                     </div>
