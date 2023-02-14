@@ -12,7 +12,7 @@
     <div class="product-item product-item-border custom-product-item">
         <a class="product-item-thumb" href="{{ route('product_details', $data) }}">
             @if (count($product->related_images) > 0)
-                <img src="/{{ $product->related_images[0]['image'] }}" width="228" height="228" alt="Image-Ctgcomputer">
+                <img src="{{ $product->related_images[0]['image_link'] }}" width="228" height="228" alt="Image-Ctgcomputer">
             @endif
         </a>
         @if ($product->discounts)
