@@ -71,7 +71,10 @@
                             <a href="/login" class="header-action-user me-lg-4 me-xl-0 d-xl-none">
                                 <i class="icon icon-user"></i>
                             </a>
-                            
+                            <a href="/cart" class="header-action-cart">
+                                <i class="cart-icon icon-handbag"></i>
+                                <span class="cart-count">{{ $cart_count }}</span>
+                            </a>
                             {{-- @livewire('components.cart-count') --}}
                             <button class="btn-menu d-xl-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
                                 <i class="fa fa-bars"></i>
@@ -145,6 +148,7 @@
                                 </a>
                             </li>
                             @endforeach 
+                            <li class="main-nav-item"><a class="main-nav-link" href="/cart">Cart</a></li>
                             <li class="main-nav-item"><a class="main-nav-link" href="/contact">Contact</a></li>
                         </ul>
                     </nav>

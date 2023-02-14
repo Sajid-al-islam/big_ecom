@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Components;
 
+use App\Http\Controllers\CartController;
 use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
@@ -11,6 +12,7 @@ class Header extends Component
     public $categories;
     public $searchQuery;
     protected $search_products=[];
+    public $cart_count;
 
     public function search_product()
     {
@@ -34,6 +36,8 @@ class Header extends Component
 
     public function render()
     {
+        $cart = new CartController;
+        $this->cart_count = $cart->cart_count();
         $this->categories = Category::where('parent_id', 0)->select('id', 'name')->get();
         return view('livewire.components.header', [
             'search_products' => $this->search_products,
