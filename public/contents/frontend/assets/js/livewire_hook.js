@@ -113,6 +113,7 @@ document.addEventListener("turbolinks:load", function(event) {
     dynamicCss();
     slider_reboot();
     scrolltotop_reboot();
+    checkout_handling();
     window.dom_load_count++;
     // let wire_els = [...document.querySelectorAll('div.border.border-danger')]
     // wire_els.forEach(i=>{
@@ -124,6 +125,10 @@ var find_event_status = message => {
     // console.log(message);
     let data = message.response.serverMemo.data;
     let status = message.response.serverMemo.data?.status_message;
+    console.log(data.message);
+    if(data.message === 'cart_added') {
+        window.s_alert("success", "Product added to cart.");
+    }
     if (status === "cartRemoved") {
         update_cart_count_html(data.cart_amount);
     }

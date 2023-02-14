@@ -182,14 +182,37 @@ class FrontendController extends Controller
     }
 
     public function website_login(Request $request)
-    {
-        $user = User::where('email', $request->email)->first();
+    {   
 
-        Auth::login($user);
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'err_message' => 'validation error',
+                'data' => $validator->errors(),
+            ], 422);
+        }
+
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+ 
+            return response()->json([
+                'message' => 'you are logged in'
+            ], 200);
+        }
 
         return response()->json([
-            'message' => 'you are logged in'
-        ], 200);
+            'message' => 'user not found'
+        ], 401);
+        
     }
     
     public function website_register(Request $request)

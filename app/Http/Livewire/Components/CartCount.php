@@ -10,7 +10,7 @@ class CartCount extends Component
     private $cart_handler;
     public $carts;
     public $cart_count;
-
+    public $message;
 
     protected $listeners = [
         'cartAdded' => 'add_product_to_cart',
@@ -31,5 +31,6 @@ class CartCount extends Component
     {
         $this->cart_handler->add_to_cart($id, $qty);
         $this->cart_count = $this->cart_handler->cart_count();
+        $this->message = "cart_added";
     }
 }

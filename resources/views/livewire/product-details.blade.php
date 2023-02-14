@@ -61,7 +61,7 @@
                             
                             <div class="mb-3">
                                 <div class="pro-qty">
-                                    <input type="text" title="Quantity" value="01">
+                                    <input type="text" title="Quantity" disabled value="01">
                                 </div>
                                 <button onclick="addToCart({{ $product->id }})" class="product-detail-cart-btn" type="button">Add to cart</button>
                             </div>
