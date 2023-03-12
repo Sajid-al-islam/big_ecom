@@ -60,7 +60,7 @@
                     </div>
                     <div class="col-md-8 col-sm-12">
                         <div class="row row-payment-delivery-order">
-                            <div class="col-md-6 col-sm-12 payment-methods">
+                            <div class="col-md-12 col-lg-6 col-sm-12 payment-methods">
                                 <div class="card checkout-section checkout-box h-100">
                                     <div class="section-head">
                                         <h2><span>2</span>Payment Method</h2>
@@ -130,7 +130,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12 delivery-methods">
+                            <div class="col-md-12 col-lg-6 col-sm-12 delivery-methods">
                                 <div class="card checkout-section">
                                     <div class="section-head">
                                         <h2><span>3</span>Delivery Method</h2>
