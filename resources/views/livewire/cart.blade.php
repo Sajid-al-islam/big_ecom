@@ -30,7 +30,7 @@
                                             <td class="product-thumbnail">
                                                 <a href="{{ route('product_details', $data) }}">
                                                     @if ($cart['product']->related_image)
-                                                        <img src="/{{ $cart['product']->related_image[0]->image }}" alt="Image" height="96">
+                                                        <img src="{{ env('PHOTO_URL') . '/' . $cart['product']->related_image[0]->image }}" alt="Image" height="96">
                                                     @else
                                                         <img src="{{ asset('contents/frontend/') }}/assets/images/empty.png" alt="Image" height="96">
                                                     @endif
