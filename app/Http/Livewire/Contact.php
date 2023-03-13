@@ -26,7 +26,7 @@ class Contact extends Component
         // Execution doesn't reach here if validation fails.
         
         $contact = new ContactMessage();
-        $contact->name = $this->name;
+        $contact->full_name = $this->name;
         $contact->email = $this->email;
         $contact->subject = $this->subject;
         $contact->message = $this->message;

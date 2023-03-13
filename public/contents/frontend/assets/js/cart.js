@@ -49,7 +49,7 @@ function checkout(event) {
             error_response(res.data)
         }
         if(res.status === 200) {
-            location.href = "/order-complete";
+            location.href = "/order-complete/"+res.data.order.id;
         }
     })
 }

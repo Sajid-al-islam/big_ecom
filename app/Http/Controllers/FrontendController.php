@@ -8,6 +8,7 @@ use App\Models\OrderDeliveryInfo;
 use App\Models\OrderDetails;
 use App\Models\OrderPayment;
 use App\Models\ProductReview;
+use App\Models\ProductStockLog;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -136,11 +137,18 @@ class FrontendController extends Controller
             }
             $order_details->qty = $product['qty'];
             $order_details->save();
+
+            $stock_log = new ProductStockLog();
+            $stock_log->product_id = $product['product']->id;
+            $stock_log->qty = $product['qty'];
+            $stock_log->type = "sell";
+            $stock_log->save();
         }
         $carts->emptyCart();
 
         return response()->json([
-            "message" => "Order Completed Successfully"
+            "message" => "Order Completed Successfully",
+            "order" => $order
         ], 200);
 
     }

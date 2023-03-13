@@ -41,7 +41,7 @@
                                         ];
                                     @endphp
                                     <a href="{{ route('product_details', $data) }}" class="list-group-item list-group-item-action">
-                                        <img src="/{{ $item->related_images[0]['image'] }}" width="80" height="80" alt="Image-Ctgcomputer">
+                                        <img src="{{ env('PHOTO_URL') . '/' . $item->related_images[0]['image'] }}" width="80" height="80" alt="Image-Ctgcomputer">
                                         {{ $item->product_name }}
                                     </a>
                                 @endforeach

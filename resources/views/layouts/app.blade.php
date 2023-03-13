@@ -126,7 +126,9 @@
                                     <div class="widget-info-item">
                                         <img src="{{ asset('contents/frontend') }}/assets/images/icons/mobile.png" alt="Icon">
                                         <div class="info-item-call">
-                                            <a href="tel://+8801733-080350"> 01733-080350 </a>
+                                            <a href="{{ env('SITE_MOBILE_NUMBER_1') }}"> {{ env('SITE_MOBILE_NUMBER_1') }} </a>
+                                            <a href="{{ env('SITE_MOBILE_NUMBER_2') }}"> {{ env('SITE_MOBILE_NUMBER_2') }} </a>
+                                            <a href="{{ env('SITE_MOBILE_NUMBER_3') }}"> {{ env('SITE_MOBILE_NUMBER_3') }} </a>
                                         </div>
                                     </div>
                                 </div>
