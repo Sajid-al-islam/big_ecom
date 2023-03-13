@@ -120,7 +120,7 @@
                                 <a class="product-detail-cart-btn p-2" target="_blank" href="https://twitter.com/intent/tweet?url={{ url()->full() }}"><i class="fa fa-twitter"></i></a></a>
                                 
                                 {{-- <li><span>SKU:</span> WX-256HG</li> --}}
-                                <li class="mt-5">
+                                <li class="mt-5 fs-6">
                                     <span>Categories:</span>
                                     @foreach ($product->related_categories as $item)
                                         {{ $item->name }}, 

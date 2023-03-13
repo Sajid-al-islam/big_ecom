@@ -126,9 +126,9 @@
                                     <div class="widget-info-item">
                                         <img src="{{ asset('contents/frontend') }}/assets/images/icons/mobile.png" alt="Icon">
                                         <div class="info-item-call">
-                                            <a href="tel://+88{{ env('SITE_MOBILE_NUMBER_1') }}"> {{ env('SITE_MOBILE_NUMBER_1') }} </a>
-                                            <a href="tel://+88{{ env('SITE_MOBILE_NUMBER_2') }}"> {{ env('SITE_MOBILE_NUMBER_2') }} </a>
-                                            <a href="tel://+88{{ env('SITE_MOBILE_NUMBER_3') }}"> {{ env('SITE_MOBILE_NUMBER_3') }} </a>
+                                            <a href="tel://{{ env('SITE_MOBILE_NUMBER_1') }}"> {{ env('SITE_MOBILE_NUMBER_1') }} </a>
+                                            <a href="tel://{{ env('SITE_MOBILE_NUMBER_2') }}"> {{ env('SITE_MOBILE_NUMBER_2') }} </a>
+                                            <a href="tel://{{ env('SITE_MOBILE_NUMBER_3') }}"> {{ env('SITE_MOBILE_NUMBER_3') }} </a>
                                         </div>
                                     </div>
                                 </div>
