@@ -9,7 +9,7 @@
                             <div class="swiper single-product-thumb-slider">
                                 <div class="swiper-wrapper">
                                     <a class="lightbox-image swiper-slide" data-fancybox="gallery" href="assets/images/shop/details/1.jpg">
-                                        <img src="/{{ $product->related_images[0]['image'] }}" width="640" height="530" alt="Image">
+                                        <img src="{{ $product->related_images[0]['image_link'] }}" width="640" height="530" alt="Image-Ctgcomputer">
                                     </a>
                                 </div>
                             </div>
