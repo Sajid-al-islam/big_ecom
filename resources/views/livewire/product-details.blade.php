@@ -1,5 +1,19 @@
 <div>
     {{-- Stop trying to control. --}}
+    <style>
+        .stock_alert {
+            line-height: 22px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #ef4a23;
+        }
+        .product-detail-content span{
+            color: black !important;
+        }
+        .product-detail-nav-description span {
+            color: black !important;
+        }
+    </style>
     <div class="product-detail-area section-space">
         @if (isset($product))
             <div class="container">
@@ -51,34 +65,42 @@
                                 
                                 
                             </div>
-                            <p class="product-detail-desc">
-                                @if ($product->total_description)
-                                    {!! $product->total_description['key_fetures'] !!}
-                                @else
-                                    {!! $product->description !!}
-                                @endif
-                            </p>
+
                             
                             <div class="mb-3">
                                 <div class="pro-qty">
                                     <input type="text" title="Quantity" disabled value="01">
                                 </div>
-                                <button onclick="addToCart({{ $product->id }})" class="product-detail-cart-btn" type="button">Add to cart</button>
+                                @if ($product->stocks_sum_qty - $product->sales_sum_qty <= $product->track_inventory_on_the_variant_level_low_stock)
+                                    <span class="me-4 mb-4 stock_alert">Out of stock</span>
+                                @else
+                                    <button onclick="addToCart({{ $product->id }})" class="product-detail-cart-btn" type="button">Add to cart</button>
+                                @endif
                             </div>
+
+                            <p class="product-detail-desc">
+                                @if ($product->specification)
+                                    {!! $product->specification !!}
+                                @else
+                                    {!! $product->description !!}
+                                @endif
+                            </p>
+                            
+                            
                             <!--== Start Features Area Wrapper ==-->
                             <div class="features-two-area">
                                 <div class="row mb-n3">
                                     <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4 mb-3">
                                         <!--== Start Feature Item ==-->
                                         <div class="feature-two-item">
-                                            <img class="icon" src="{{ asset('contents/frontend') }}/assets/images/icons/1.png" width="44" height="38" alt="Icon"> <span class="feature-two-title">Support 24/7</span>
+                                            <img class="icon" src="#" width="44" height="38" alt="Icon"> <span class="feature-two-title">Support 24/7</span>
                                         </div>
                                         <!--== End Feature Item ==-->
                                     </div>
                                     <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4 mb-3">
                                         <!--== Start Feature Item ==-->
                                         <div class="feature-two-item">
-                                            <img class="icon" src="{{ asset('contents/frontend') }}/assets/images/icons/3.png" width="48" height="38" alt="Icon"> <span class="feature-two-title">Card Payment</span>
+                                            <img class="icon" src="#" width="48" height="38" alt="Icon"> <span class="feature-two-title">Card Payment</span>
                                         </div>
                                         <!--== End Feature Item ==-->
                                     </div>
@@ -118,13 +140,10 @@
                 <div class="tab-content" id="product-detail-nav-tabContent">
                     <div class="tab-pane fade show active" id="description">
                         <h2 class="my-4">Description</h2>
-                        <p class="product-detail-nav-description">
-                            @if ($product->total_description)
-                                {!! $product->total_description['main_description'] !!}
-                            @else
-                                {!! $product->description !!}
-                            @endif
-                        </p>
+                        
+                        <div class="product-detail-nav-description">
+                            {!! $product->description !!}
+                        </div>
                     </div>
     
                     {{-- <div class="tab-pane" id="specification" role="tabpanel" aria-labelledby="specification-tab">

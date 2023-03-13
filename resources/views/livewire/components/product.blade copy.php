@@ -1,6 +1,5 @@
 
 <div class="{{ isset($class)? $class : "col-md-3" }} mb-4" :wire:key="{{ $product->id }}">
-    {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
     <style>
         .stock_alert {
             line-height: 22px;
@@ -9,6 +8,7 @@
             color: #ef4a23;
         }
     </style>
+    {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
     @if (isset($product))    
     @php
         $data = [
@@ -52,12 +52,10 @@
                     @endif
                 </div>
                 @if ($product->stocks_sum_qty - $product->sales_sum_qty <= $product->track_inventory_on_the_variant_level_low_stock)
-                    
                     <span class="me-4 mb-4 stock_alert">Out of stock</span>
                 @else
                     <button type="button" onclick="Livewire.emitTo('components.cart-count', 'cartAdded', {{$product->id}})" class="info-btn-cart me-4 mb-4"><i class="icon-handbag"></i></button>
                 @endif
-                {{-- <button type="button" onclick="Livewire.emitTo('components.cart-count', 'cartAdded', {{$product->id}})" class="info-btn-cart me-4 mb-4"><i class="icon-handbag"></i></button> --}}
             </div>
         </div>
     </div>

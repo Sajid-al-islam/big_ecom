@@ -17,7 +17,8 @@ class ProductDetails extends Component
     
     public function mount($id)
     {
-        $this->product = Product::find($id);
+        $this->product = Product::where('id',$id)->withSum('stocks','qty')
+        ->withSum('sales','qty')->first();
     }
     public function render()
     {

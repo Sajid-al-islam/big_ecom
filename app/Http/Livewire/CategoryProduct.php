@@ -121,7 +121,10 @@ class CategoryProduct extends Component
             $query->from('category_product')
                 ->whereColumn('category_product.product_id', 'products.id')
                 ->where('category_product.category_id', $category_id);
-        })->where('brand_id', $brand_id);
+        })
+        ->withSum('stocks','qty')
+        ->withSum('sales','qty')
+        ->where('brand_id', $brand_id);
         $this->products = $products_query->paginate(18);
         $this->make_paginate();
         
@@ -155,7 +158,9 @@ class CategoryProduct extends Component
                 ->whereColumn('category_product.product_id', 'products.id')
                 ->where('category_product.category_id', $this->category_id);
         })
-        ->whereBetween('default_price', [(int) $price_filter['min_price'], (int) $price_filter['max_price']]);
+        ->whereBetween('default_price', [(int) $price_filter['min_price'], (int) $price_filter['max_price']])
+        ->withSum('stocks','qty')
+        ->withSum('sales','qty');
 
         if(session()->has('brand_id')) {
             $brand_id = session()->get('brand_id');
@@ -173,7 +178,9 @@ class CategoryProduct extends Component
             $query->from('category_product')
                 ->whereColumn('category_product.product_id', 'products.id')
                 ->where('category_product.category_id', $this->category_id);
-        });
+        })
+        ->withSum('stocks','qty')
+        ->withSum('sales','qty');
         $this->products = $this->products_query->paginate(18);
         $this->make_paginate();
     }
@@ -188,8 +195,10 @@ class CategoryProduct extends Component
                 ->whereColumn('category_product.product_id', 'products.id')
                 ->where('category_product.category_id', $this->category_id);
         })
-            ->where('brand_id', $brand_id)
-            ->whereBetween('default_price', [(int) $price_range['min_price'], (int) $price_range['max_price']]);
+        ->where('brand_id', $brand_id)
+        ->withSum('stocks','qty')
+        ->withSum('sales','qty')
+        ->whereBetween('default_price', [(int) $price_range['min_price'], (int) $price_range['max_price']]);
         // $this->getBrands();
         $this->products = $this->products_query->paginate(18);
         $this->make_paginate();
@@ -201,7 +210,10 @@ class CategoryProduct extends Component
             $query->from('category_product')
                 ->whereColumn('category_product.product_id', 'products.id')
                 ->where('category_product.category_id', $this->category_id);
-        })->whereBetween('default_price', [(int) $price_range['min_price'], (int) $price_range['max_price']]);
+        })
+        ->withSum('stocks','qty')
+        ->withSum('sales','qty')
+        ->whereBetween('default_price', [(int) $price_range['min_price'], (int) $price_range['max_price']]);
         // $this->getBrands();
         $this->products = $this->products_query->paginate(18);
         $this->make_paginate();

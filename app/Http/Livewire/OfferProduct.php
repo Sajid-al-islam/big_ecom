@@ -16,6 +16,8 @@ class OfferProduct extends Component
                 ->whereColumn('discount_products.product_id', 'products.id')
                 ->where("discount_last_date",">", Carbon::now());
         })
+        ->withSum('stocks','qty')
+        ->withSum('sales','qty')
         ->paginate(20);
         return view('livewire.offer-product', [
             'products' => $this->products,

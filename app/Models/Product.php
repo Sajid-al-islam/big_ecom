@@ -20,8 +20,7 @@ class Product extends Model
         'custom_fields_json',
         'variant_values_json',
         'related_categories',
-        'related_images',
-        "total_description"
+        'related_images'
     ];
 
     public function getRelatedCategoriesAttribute()
@@ -37,26 +36,6 @@ class Product extends Model
                 }
             }
             return $category;
-        }
-    }
-
-    public function getTotalDescriptionAttribute()
-    {
-        $description_check = Str::contains($this->description, '<h2 style="margin-right: 0px; margin-bottom: 5px; margin-left: 0px; padding: 0px; line-height: 26px;">Specification</h2>');
-        
-        if($description_check) {
-            $description_split = explode('<h2 style="margin-right: 0px; margin-bottom: 5px; margin-left: 0px; padding: 0px; line-height: 26px;">Specification</h2>' , $this->description);
-            $key_fetures = $description_split[0];
-            $specification = $description_split[1];
-
-            if(Str::contains($key_fetures, '<p style="margin: 0px; padding: 0px 0px 10px; display: block; line-height: 20px;"><br></p><p style="margin: 0px; padding: 0px 0px 10px; display: block; line-height: 20px;"><br></p>')) {
-                $key_fetures = Str::replace('<p style="margin: 0px; padding: 0px 0px 10px; display: block; line-height: 20px;"><br></p>', '' ,$key_fetures);
-            }
-
-            return [
-                "key_fetures" => $key_fetures,
-                "main_description" => $specification,
-            ];
         }
     }
 
@@ -139,5 +118,15 @@ class Product extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class)->withTimestamps();
+    }
+
+    public function stocks()
+    {
+        return $this->hasMany(ProductStock::class,'product_id');
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(OrderDetails::class,'product_id');
     }
 }

@@ -57,9 +57,12 @@ class HomePageProduct extends Component
         ->with('discounts', function($q) {
             $q->orderBy('created_at','DESC')->where('discount_last_date', '>', Carbon::now())->select('id', 'product_id' ,'discount_percent', 'discount_amount', 'discount_last_date');
         })
+        ->select('id', 'product_name', 'default_price', 'track_inventory_on_the_variant_level_low_stock')
+        ->withSum('stocks','qty')
+        ->withSum('sales','qty')
         ->skip($this->skip)
-        ->select('id', 'product_name', 'default_price')
         ->get()->toArray());
+        // dd($this->products);
     }
 
     public function details($id)

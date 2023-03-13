@@ -118,7 +118,7 @@
                                 </a>
                                 <div class="widget-contact widget-contact-two">
                                     <p class="widget-contact-desc me-n1">If you have any question. please contact us 
-                                        <a href="mailto://ctgcomputercentre2008@gmail.com">ctgcomputercentre2008@gmail.com</a></p>
+                                        <a href="mailto://ctgcomputer.org@gmail.com">ctgcomputer.org@gmail.com</a></p>
                                     <div class="widget-info-item mb-6">
                                         <img src="{{ asset('contents/frontend') }}/assets/images/icons/pin.png" alt="Icon">
                                         <p>Computer City Centre (Multiplan), Level: 4, Shop: 407-409, 69-71 New Elephant Road</p>
@@ -126,9 +126,9 @@
                                     <div class="widget-info-item">
                                         <img src="{{ asset('contents/frontend') }}/assets/images/icons/mobile.png" alt="Icon">
                                         <div class="info-item-call">
-                                            <a href="{{ env('SITE_MOBILE_NUMBER_1') }}"> {{ env('SITE_MOBILE_NUMBER_1') }} </a>
-                                            <a href="{{ env('SITE_MOBILE_NUMBER_2') }}"> {{ env('SITE_MOBILE_NUMBER_2') }} </a>
-                                            <a href="{{ env('SITE_MOBILE_NUMBER_3') }}"> {{ env('SITE_MOBILE_NUMBER_3') }} </a>
+                                            <a href="tel://+88{{ env('SITE_MOBILE_NUMBER_1') }}"> {{ env('SITE_MOBILE_NUMBER_1') }} </a>
+                                            <a href="tel://+88{{ env('SITE_MOBILE_NUMBER_2') }}"> {{ env('SITE_MOBILE_NUMBER_2') }} </a>
+                                            <a href="tel://+88{{ env('SITE_MOBILE_NUMBER_3') }}"> {{ env('SITE_MOBILE_NUMBER_3') }} </a>
                                         </div>
                                     </div>
                                 </div>
