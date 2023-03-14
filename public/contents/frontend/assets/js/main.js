@@ -96,6 +96,10 @@
         slidesPerGroup: 1,
         loop: true,
         speed: 700,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
         spaceBetween: 0,
         effect: 'fade',
         fadeEffect: {
@@ -104,7 +108,7 @@
         pagination: {
             el: '.hero-slide-five-pagination',
             clickable: 'true',
-        }
+        },
     });
 
 
