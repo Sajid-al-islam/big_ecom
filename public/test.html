@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="./js/add-days-to-date.js"></script> -->
+    <!--<script src="./js/array-sort.js"></script>-->
+</head>
+
+<body>
+    <div>
+        <label for="textInput">Speak here:</label>
+        <div type="text" id="textInput"></div>
+        <button onclick="talk()">start talk</button>
+        <button id="broadcast-message">broadcast-message</button>
+    </div>
+    <script>
+                const bc = new BroadcastChannel('myChannel');
+        const broadcastMessageButton = document.querySelector("#broadcast-message");
+
+        broadcastMessageButton.addEventListener("click", () => {
+            bc.postMessage("alsdjf;lasd f");
+        });
+        // Set a callback function to handle incoming messages
+        bc.addEventListener("message", (e) => {
+            // received.textContent = event.data;
+            console.log(e)
+        });
+
+        bc.postMessage('a;lksdjfl;kas dfalksjfl; kasd')
+        bc.postMessage('a;lksdjfl;kas dfalksjfl; kasd')
+        bc.postMessage('a;lksdjfl;kas dfalksjfl; kasd')
+        
+        // Create WebSocket connection.
+        const socket = new WebSocket('wss://node.techparkit.org');
+        // const socket = new WebSocket('ws://localhost:3000');
+        
+        // Connection opened
+        socket.addEventListener('open', (event) => {
+            socket.send('Hello Server!');
+        });
+        
+        // Listen for messages
+        socket.addEventListener('message', (event) => {
+            console.log('Message from server ', event.data);
+        });
+
+        function talk() {
+            // Check if the browser supports the Web Speech API
+            if ('webkitSpeechRecognition' in window) {
+                // Create a new instance of the SpeechRecognition object
+                const recognition = new webkitSpeechRecognition();
+
+                // Set the language to use for speech recognition
+                recognition.lang = 'en-US';
+
+                // Set the maximum number of alternative transcripts to be returned
+                recognition.maxAlternatives = 1;
+
+                // Set a callback function for when speech is recognized
+                recognition.onresult = function (event) {
+                    // Get the first transcript from the recognition result
+                    const transcript = event.results[0][0].transcript;
+
+                    // Do something with the transcript (e.g. display it in a text field)
+                    document.getElementById('textInput').innerHTML += transcript + "<br/>";
+                }
+
+                // Start the speech recognition service
+                recognition.start();
+            } else {
+                alert("Sorry, your browser doesn't support the Web Speech API");
+            }
+        }
+    </script>
+</body>
+
+</html>

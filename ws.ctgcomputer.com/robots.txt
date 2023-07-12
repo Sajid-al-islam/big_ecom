@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap:https://ws.ctgcomputer.com/sitemap.xml
+Sitemap:https://ws.ctgcomputer.com/sitemap_1.xml
